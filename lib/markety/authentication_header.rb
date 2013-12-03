@@ -1,4 +1,4 @@
-module Marketo
+module Markety
   # This class exists only to encapsulate the authentication header part of a soap request to marketo
   # Marketo requires a somewhat complex calculation of an encrypted signature and so it seemed sensible to pull this code out here
   class AuthenticationHeader

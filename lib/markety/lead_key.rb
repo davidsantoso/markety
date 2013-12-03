@@ -1,4 +1,4 @@
-module Marketo
+module Markety
   # Encapsulates a key used to look up or describe a specific marketo lead.
   class LeadKey
     # - *key_type* the type of key to use see LeadKeyType

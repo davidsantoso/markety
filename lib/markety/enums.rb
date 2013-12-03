@@ -1,4 +1,4 @@
-module Marketo
+module Markety
   # Types of operations you can do on a marketo list
   module ListOperationType
     ADD_TO       = 'ADDTOLIST'

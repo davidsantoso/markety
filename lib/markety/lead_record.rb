@@ -1,4 +1,4 @@
-module Marketo
+module Markety
   # Represents a record of the data known about a lead within marketo
   class LeadRecord
     def initialize(email, idnum = nil)
