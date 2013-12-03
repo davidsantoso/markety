@@ -2,7 +2,7 @@ require File.expand_path('authentication_header', File.dirname(__FILE__))
 
 module Markety
   def self.new_client(access_key, secret_key, end_point, api_version = '2_2', document_version = '2_2')
-    client = Savon::Client.new do
+    client = Savon.client.new do
       wsdl.endpoint     = end_point
       wsdl.document     = "http://app.marketo.com/soap/mktows/#{document_version}?WSDL"
       http.read_timeout = 90
@@ -10,7 +10,7 @@ module Markety
       http.headers      = {"Connection" => "Keep-Alive"}
     end
 
-    Client.new(client, Rapleaf::Marketo::AuthenticationHeader.new(access_key, secret_key))
+    Client.new(client, Markety::AuthenticationHeader.new(access_key, secret_key))
   end
 
   # = The client for talking to marketo
@@ -18,7 +18,7 @@ module Markety
   #
   # Usage:
   #
-  # client = Rapleaf::Marketo.new_client(<access_key>, <secret_key>, api_subdomain = 'na-i', api_version = '1_5', document_version = '1_4')
+  # client = Markety.new_client(<access_key>, <secret_key>, api_subdomain = 'na-i', api_version = '1_5', document_version = '1_4')
   #
   # == get_lead_by_email:
   #
@@ -32,11 +32,11 @@ module Markety
   #
   # == sync_lead: (update)
   #
-  # lead_record = client.sync_lead('example@rapleaf.com', 'Joe', 'Smith', 'Company 1', '415 911')
+  # lead_record = client.sync_lead('example@example.com', 'Joe', 'Smith', 'Company 1', '415 911')
   #
   # == sync_lead_record: (update with custom fields)
   #
-  # lead_record = Rapleaf::Marketo::LeadRecord.new('harry@rapleaf.com')
+  # lead_record = Markety::LeadRecord.new('example@example.com')
   #
   # lead_record.set_attribute('FirstName', 'harry')
   #
@@ -44,7 +44,7 @@ module Markety
   #
   # lead_record.set_attribute('Email', 'harry@somesite.com')
   #
-  # lead_record.set_attribute('Company', 'Rapleaf')
+  # lead_record.set_attribute('Company', 'Some Company')
   #
   # lead_record.set_attribute('MobilePhone', '123 456')
   #
@@ -55,7 +55,7 @@ module Markety
   # similarly, you can force a sync via id instead of email by calling client.sync_lead_record_on_id(lead_record)
   #
   class Client
-    # This constructor is used internally, create your client with *Rapleaf::Marketo.new_client(<access_key>, <secret_key>)*
+    # This constructor is used internally, create your client with *Markety.new_client(<access_key>, <secret_key>)*
     def initialize(savon_client, authentication_header)
       @client = savon_client
       @header = authentication_header
