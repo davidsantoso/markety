@@ -1,4 +1,4 @@
-marketo_gem
+Markety
 ===========
 The MIT License (MIT)
 Copyright (c) 2013 Rapleaf, Inc.
