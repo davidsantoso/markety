@@ -32,7 +32,7 @@ module Markety
       header     = Markety::AuthenticationHeader.new(access_key, secret_key)
       header.set_time(DateTime.new(2010, 4, 9, 14, 4, 55, -7/24.0))
 
-      header.get_request_timestamp.should == '2010-04-09T14:04:54-07:00'
+      header.get_request_timestamp.should == '2010-04-09T14:04:55-07:00'
       header.get_request_signature.should == 'ffbff4d4bef354807481e66dc7540f7890523a87'
     end
 
