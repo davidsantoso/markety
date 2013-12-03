@@ -10,7 +10,7 @@ module Markety
       http.headers      = {"Connection" => "Keep-Alive"}
     end
 
-    Client.new(client, Markety::AuthenticationHeader.new(access_key, secret_key))
+    Client.new(client, Markety::AuthenticationHeader.new(access_key, secret_key, end_point))
   end
 
   # = The client for talking to marketo
