@@ -30,9 +30,9 @@ module Markety
       secret_key = '899756834129871744AAEE88DDCC77CDEEDEC1AAAD66'
 
       header     = Markety::AuthenticationHeader.new(access_key, secret_key)
-      header.set_time(DateTime.new(2010, 4, 9, 14, 4, 55, -7/24.0))
+      header.set_time(DateTime.new(2010, 4, 9, 14, 4, 54, -7/24.0))
 
-      header.get_request_timestamp.should == '2010-04-09T14:04:55-07:00'
+      header.get_request_timestamp.should == '2010-04-09T14:04:54-07:00'
       header.get_request_signature.should == 'ffbff4d4bef354807481e66dc7540f7890523a87'
     end
 
@@ -54,10 +54,12 @@ module Markety
       header     = Markety::AuthenticationHeader.new(access_key, secret_key)
       header.set_time(DateTime.new(2010, 4, 9, 14, 4, 55, -7/24.0))
 
-      header.to_hash.should == {
+      header.to_hash.should == {"ns1:AuthenticationHeader" => 
+        {
           'mktowsUserId'     => header.get_mktows_user_id,
           'requestSignature' => header.get_request_signature,
           'requestTimestamp' => header.get_request_timestamp,
+        }
       }
     end
   end

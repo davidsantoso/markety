@@ -1,6 +1,5 @@
 module Markety
   # This class exists only to encapsulate the authentication header part of a soap request to marketo
-  # Marketo requires a somewhat complex calculation of an encrypted signature and so it seemed sensible to pull this code out here
   class AuthenticationHeader
     DIGEST = OpenSSL::Digest::Digest.new('sha1')
 
@@ -29,10 +28,12 @@ module Markety
     end
 
     def to_hash
-      {
+      { "ns1:AuthenticationHeader" =>
+        {
           "mktowsUserId"     => get_mktows_user_id,
           "requestSignature" => get_request_signature,
           "requestTimestamp" => get_request_timestamp
+        }
       }
     end
 
