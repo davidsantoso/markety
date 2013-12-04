@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.homepage     = "https://github.com/davidsantoso/markety"
   s.files        = Dir['lib/**/*.rb']
   s.require_path = 'lib'
+  s.required_ruby_version       = '>= 1.9.3'
   s.add_dependency             'savon', '~> 2.3.0'
-  s.add_dependency             'nokogiri', '>= 1.4.0'
   s.add_development_dependency 'rspec', '>= 2.3.0'
 end
