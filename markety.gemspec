@@ -12,5 +12,6 @@ Gem::Specification.new do |s|
   s.files        = Dir['lib/**/*.rb']
   s.require_path = 'lib'
   s.add_dependency             'savon', '~> 2.3.0'
+  s.add_dependency             'nokogiri', '>= 1.4.0'
   s.add_development_dependency 'rspec', '>= 2.3.0'
 end
