@@ -1,9 +1,9 @@
 # Markety
 Easily integrate with the Marketo SOAP API to find and update leads.
 
-This gem is a fork of the original Marketo gem but has been updated to work with Savon 2.3.0. Note that there is a Savon dependency issue with it requiring < 1.6. If you're already running nokogiri 1.6 then you'll probably run into problems when you execute bundle install. Unfortunately, I can't think of a fix until the rubygems account for Savon is updated to the [version 2](https://github.com/savonrb/savon/tree/version2) branch. 
+This gem is a fork of the original Marketo gem but has been updated to work with Savon 2.3.0. Note that there is a Savon dependency issue with it requiring < 1.6 to maintain support for Ruby 1.8. If you're already running nokogiri 1.6 then you'll probably run into problems when you execute bundle install since the Savon gem in rubygems currently does not allow for nokogiri > 1.6. Unfortunately, the only work around is to use bundler and installing the gem directly from the GitHub [Savon version 2](https://github.com/savonrb/savon/tree/version2) branch. 
 
-Here's the specific [issue](https://github.com/savonrb/savon/issues/487). The Savon gem should be updated on rubygems.org later this week so the dependency issue should be resolved soon.
+Here's the specific [issue](https://github.com/savonrb/savon/issues/487). The Savon gem should be updated on rubygems.org later this week so the dependency issue will be resolved and you won't need to manually set savon and wasabi.
 
 ## Install
 Markety is available through Rubygems. Just add to your Gemfile:
