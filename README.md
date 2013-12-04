@@ -6,18 +6,17 @@ This gem is a fork of the original Marketo gem but has been updated to work with
 Here's the specific [issue](https://github.com/savonrb/savon/issues/487). The Savon gem should be updated on rubygems.org later this week so the dependency issue should be resolved soon.
 
 ## Install
-Markety is available through Rubygems and can be installed via:
+Markety is available through Rubygems. Just add to your Gemfile:
 
 ```
-gem install markety
-```
-or add to your Gemfile:
-
-```
+gem "savon", :git => "git://github.com/savonrb/savon.git", :branch => :version2
+gem "wasabi", :git => "https://github.com/savonrb/wasabi.git"
 gem 'markety'
 ```
 
 and run bundle install.
+
+The savon and wasabi gems must be installed via GitHub to avoid the nokogiri 1.6 dependency issue.
 
 ## Examples
 
