@@ -9,8 +9,8 @@ Here's the specific [issue](https://github.com/savonrb/savon/issues/487). The sa
 For now, add this your Gemfile:
 
 ```ruby
-gem "savon", :git => "git://github.com/savonrb/savon.git", :branch => :version2
-gem "wasabi", :git => "https://github.com/savonrb/wasabi.git"
+gem 'savon', :git => 'git://github.com/savonrb/savon.git', :branch => :version2
+gem 'wasabi', :git => 'https://github.com/savonrb/wasabi.git'
 gem 'markety'
 ```
 
