@@ -1,7 +1,7 @@
 # Markety
 Easily integrate with the Marketo SOAP API to find and update leads.
 
-Unfortunately this does not seem to currently be working. The savon gem to build to SOAP request does not seem to properly set the operation. I've submitted an [issue](https://github.com/savonrb/savon/issues/530) so hopefully it's resolved soon.
+Unfortunately this gem isn't working. The savon gem to build to SOAP request does not seem to properly set the operation based off of the WSDL file. I've submitted an [issue](https://github.com/savonrb/savon/issues/530) so hopefully it's resolved soon.
 
 ## Install
 For now, add this your Gemfile:
@@ -11,8 +11,6 @@ gem 'markety'
 ```
 
 and run bundle install.
-
-The savon and wasabi gems must be installed via GitHub to avoid the nokogiri 1.6 dependency issue.
 
 ## Examples
 
