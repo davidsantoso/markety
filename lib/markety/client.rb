@@ -3,7 +3,9 @@ module Markety
     client = Savon.client do
       endpoint end_point
       wsdl "http://app.marketo.com/soap/mktows/#{api_version}?WSDL"
-      namespaces("xmlns:ns1" => "http://www.marketo.com/mktows/")
+      env_namespace "SOAP-ENV"
+      namespaces({"xmlns:ns1" => "http://www.marketo.com/mktows/"})
+      pretty_print_xml true
     end
     
     Client.new(client, Markety::AuthenticationHeader.new(access_key, secret_key))

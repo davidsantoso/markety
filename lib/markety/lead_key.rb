@@ -21,8 +21,8 @@ module Markety
     # create a hash from this instance, for sending this object to marketo using savon
     def to_hash
       {
-          "keyType" => @key_type,
-          "keyValue" => @key_value
+        "keyType" => @key_type,
+        "keyValue" => @key_value
       }
     end
   end
