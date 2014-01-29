@@ -1,9 +1,12 @@
 module Markety
   # Represents a record of the data known about a lead within marketo
   class LeadRecord
+    attr_reader :types
+
     def initialize(email, idnum = nil)
       @idnum      = idnum
       @attributes = {}
+      @types      = {}
       set_attribute('Email', email)
     end
 
@@ -11,7 +14,7 @@ module Markety
     def self.from_hash(savon_hash)
       lead_record = LeadRecord.new(savon_hash[:email], savon_hash[:id].to_i)
       savon_hash[:lead_attribute_list][:attribute].each do |attribute|
-        lead_record.set_attribute(attribute[:attr_name], attribute[:attr_value])
+        lead_record.set_attribute(attribute[:attr_name], attribute[:attr_value], attribute[:attr_type])
       end
       lead_record
     end
@@ -31,13 +34,18 @@ module Markety
     end
 
     # update the value of the named attribute
-    def set_attribute(name, value)
+    def set_attribute(name, value, type = "string")
       @attributes[name] = value
+      @types[name] = type
     end
 
     # get the value for the named attribute
     def get_attribute(name)
       @attributes[name]
+    end
+
+    def get_attribute_type(name)
+      @types[name]
     end
 
     # will yield pairs of |attribute_name, attribute_value|

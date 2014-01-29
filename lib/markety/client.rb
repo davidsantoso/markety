@@ -46,7 +46,7 @@ module Markety
       begin
         attributes = []
         lead_record.each_attribute_pair do |name, value|
-          attributes << {:attr_name => name, :attr_type => 'string', :attr_value => value}
+          attributes << {:attr_name => name, :attr_value => value, :attr_type => lead_record.get_attribute_type(name) }
         end
 
         response = send_request(:sync_lead, {
@@ -72,7 +72,7 @@ module Markety
       begin
         attributes = []
         lead_record.each_attribute_pair do |name, value|
-          attributes << {:attr_name => name, :attr_type => 'string', :attr_value => value}
+          attributes << {:attr_name => name, :attr_value => value}
         end
 
         attributes << {:attr_name => 'Id', :attr_type => 'string', :attr_value => idnum.to_s}
