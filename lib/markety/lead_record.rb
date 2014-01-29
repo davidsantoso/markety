@@ -36,7 +36,7 @@ module Markety
     # update the value of the named attribute
     def set_attribute(name, value, type = "string")
       @attributes[name] = value
-      @types[type] = type
+      @types[name] = type
     end
 
     # get the value for the named attribute
