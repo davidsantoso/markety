@@ -92,31 +92,37 @@ module Markety
       end
     end
 
-    def add_to_list(list_key, email)
-      list_operation(list_key, ListOperationType::ADD_TO, email)
+    def add_to_list(list_name, idnum)
+      list_operation(list_name, ListOperationType::ADD_TO, idnum)
     end
 
-    def remove_from_list(list_key, email)
-      list_operation(list_key, ListOperationType::REMOVE_FROM, email)
+    def remove_from_list(list_name, idnum)
+      list_operation(list_name, ListOperationType::REMOVE_FROM, idnum)
     end
 
-    def is_member_of_list?(list_key, email)
-      list_operation(list_key, ListOperationType::IS_MEMBER_OF, email)
+    def is_member_of_list?(list_name, idnum)
+      list_operation(list_name, ListOperationType::IS_MEMBER_OF, idnum)
     end
 
     private
-      def list_operation(list_key, list_operation_type, email)
+      def list_operation(list_name, list_operation_type, idnum)
         begin
           response = send_request(:list_operation, {
             :list_operation   => list_operation_type,
-            :list_key         => list_key,
             :strict           => 'false',
+            :list_key         => {
+              :key_type => 'MKTOLISTNAME', 
+              :key_value => list_name
+            },
             :list_member_list => {
-              :lead_key => [
-              {:key_type => 'EMAIL', :key_value => email}
-            ]
+              :lead_key => [{
+                :key_type => 'IDNUM', 
+                :key_value => idnum
+                }
+              ]
+            }
           }
-        })
+        )
         return response
       rescue Exception => e
         @logger.log(e) if @logger
