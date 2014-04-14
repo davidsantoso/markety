@@ -58,6 +58,7 @@ module Markety
             }
           }
         })
+
         return LeadRecord.from_hash(response[:success_sync_lead][:result][:lead_record])
       rescue Exception => e
         @logger.log(e) if @logger
