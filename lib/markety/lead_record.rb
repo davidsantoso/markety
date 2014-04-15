@@ -1,5 +1,3 @@
-require 'pp'
-
 module Markety
   # Represents a record of the data known about a lead within marketo
   class LeadRecord
