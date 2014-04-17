@@ -30,8 +30,8 @@ module Markety
       lead_key = LeadKey.new(KEY_TYPE, KEY_VALUE)
 
       lead_key.to_hash.should == {
-          :key_type => KEY_TYPE,
-          :key_value => KEY_VALUE
+          "keyType" => KEY_TYPE,
+          "keyValue" => KEY_VALUE
       }
     end
   end
