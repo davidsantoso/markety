@@ -1,4 +1,7 @@
 # Markety
+
+[![Build Status](https://travis-ci.org/davidsantoso/markety.svg?branch=master)](https://travis-ci.org/davidsantoso/markety)
+
 Easily integrate with the Marketo SOAP API to find and update leads.
 
 This is a fork off of the [Rapleaf marketo_gem] (https://github.com/Rapleaf/marketo_gem) but has been updated to work with Savon v2.3.1. It makes connecting to your Marketo database to find and update leads a snap. If you're having problems connecting to Marketo, please submit an issue as there have been lots of changes with [Savon] (https://github.com/savonrb/savon) lately.
@@ -16,7 +19,7 @@ and run bundle install.
 
 ```ruby
 # Instantiate a new Markety client using your Marketo SOAP endpoint, User ID, and Encryption Key
-client = Markety.new_client(USER_ID, ENCRYPTION_KEY, END_POINT) 
+client = Markety.new_client(USER_ID, ENCRYPTION_KEY, END_POINT)
 
 # Get a lead from the Marketo database
 lead = client.get_lead_by_email("joe@example.com")
