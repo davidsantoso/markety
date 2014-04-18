@@ -7,10 +7,10 @@ module Markety
       namespaces({"xmlns:ns1" => "http://www.marketo.com/mktows/"})
       pretty_print_xml true
     end
-    
+
     Client.new(client, Markety::AuthenticationHeader.new(access_key, secret_key))
   end
-  
+
   class Client
     def initialize(savon_client, authentication_header)
       @client = savon_client
@@ -46,15 +46,15 @@ module Markety
       begin
         attributes = []
         lead_record.each_attribute_pair do |name, value|
-          attributes << {:attr_name => name, :attr_value => value, :attr_type => lead_record.get_attribute_type(name) }
+          attributes << {attr_name: name, attr_value: value, attr_type: lead_record.get_attribute_type(name) }
         end
 
         response = send_request(:sync_lead, {
-          :return_lead => true,
-          :lead_record => {
-            :email => lead_record.email,
-            :lead_attribute_list => {
-              :attribute => attributes
+          return_lead: true,
+          lead_record: {
+            email: lead_record.email,
+            lead_attribute_list: {
+              attribute: attributes
             }
           }
         })
@@ -73,17 +73,17 @@ module Markety
       begin
         attributes = []
         lead_record.each_attribute_pair do |name, value|
-          attributes << {:attr_name => name, :attr_value => value}
+          attributes << {attr_name: name, attr_value: value}
         end
 
-        attributes << {:attr_name => 'Id', :attr_type => 'string', :attr_value => idnum.to_s}
+        attributes << {attr_name: 'Id', attr_type: 'string', attr_value: idnum.to_s}
 
         response = send_request(:sync_lead, {
-          :return_lead => true,
-          :lead_record =>
+          return_lead: true,
+          lead_record:
           {
-            :lead_attribute_list => { :attribute => attributes},
-            :id => idnum
+            lead_attribute_list: { attribute: attributes},
+            id: idnum
           }
         })
         return LeadRecord.from_hash(response[:success_sync_lead][:result][:lead_record])
@@ -109,16 +109,16 @@ module Markety
       def list_operation(list_name, list_operation_type, idnum)
         begin
           response = send_request(:list_operation, {
-            :list_operation   => list_operation_type,
-            :strict           => 'false',
-            :list_key         => {
-              :key_type => 'MKTOLISTNAME', 
-              :key_value => list_name
+            list_operation: list_operation_type,
+            strict:         'false',
+            list_key: {
+              key_type: 'MKTOLISTNAME',
+              key_value: list_name
             },
-            :list_member_list => {
-              :lead_key => [{
-                :key_type => 'IDNUM', 
-                :key_value => idnum
+            list_member_list: {
+              lead_key: [{
+                key_type: 'IDNUM',
+                key_value: idnum
                 }
               ]
             }
@@ -148,7 +148,7 @@ module Markety
     end
 
     def request(namespace, message, header)
-      @client.call(namespace, :message => message, :soap_header => header)
+      @client.call(namespace, message: message, soap_header: header)
     end
   end
 end
