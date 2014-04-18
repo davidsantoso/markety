@@ -16,5 +16,5 @@ Gem::Specification.new do |s|
   s.required_ruby_version       = '>= 1.9.3'
   s.add_dependency             'savon', '= 2.3.1'
   s.add_dependency             'wasabi', '= 3.2.1'
-  s.add_development_dependency 'rspec', '>= 2.3.0'
+  s.add_development_dependency 'rspec', '~> 2.3', '>= 2.3.0'
 end
