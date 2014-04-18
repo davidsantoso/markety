@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/davidsantoso/markety.svg?branch=master)](https://travis-ci.org/davidsantoso/markety)
 [![Gem Version](https://badge.fury.io/rb/markety.svg)](http://badge.fury.io/rb/markety)
+[![Coverage Status](https://coveralls.io/repos/davidsantoso/markety/badge.png)](https://coveralls.io/r/davidsantoso/markety)
 
 Easily integrate with the Marketo SOAP API to find and update leads.
 
