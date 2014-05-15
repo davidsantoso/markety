@@ -30,7 +30,7 @@ lead = client.get_lead_by_email("joe@example.com")
 lead.set_attribute("Email", "joe-schmoe@example.com")
 
 # Update a lead record with an attribute that isn't a string
-lead.set_attribute("Activated", true, "Boolean")
+lead.set_attribute("Activated", true, "Boolean") # [1]
 
 # Sync the lead with Marketo
 response = client.sync_lead_record(lead)
@@ -44,3 +44,6 @@ client.add_to_list('The_List_Name', lead.idnum)
 # Remove a lead from a particular list
 client.remove_from_list('The_List_Name', lead.idnum)
 ```
+
+[1] Note that [the Marketo API does not let you create custom fields] (https://community.marketo.com/MarketoDiscussionDetail?id=90650000000PpyEAAS#j_id0:j_id2:j_id9:j_id10:apexideas:j_id248) at this time. In order to set a custom attribute through the API, it must first be added from the Admin interface.  
+_(Admin » Field Management » New Custom Field)_
