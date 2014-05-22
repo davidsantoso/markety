@@ -1,4 +1,4 @@
-require File.expand_path('../spec_helper', File.dirname(__FILE__))
+require 'spec_helper'
 
 module Markety
   ACCESS_KEY = 'ACCESS_KEY'
@@ -54,7 +54,7 @@ module Markety
       header     = Markety::AuthenticationHeader.new(access_key, secret_key)
       header.set_time(DateTime.new(2010, 4, 9, 14, 4, 55, -7/24.0))
 
-      header.to_hash.should == {"ns1:AuthenticationHeader" => 
+      header.to_hash.should == {"ns1:AuthenticationHeader" =>
         {
           'mktowsUserId'     => header.get_mktows_user_id,
           'requestSignature' => header.get_request_signature,

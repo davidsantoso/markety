@@ -1,6 +1,5 @@
-require "rubygems"
-require "rspec"
 require 'coveralls'
-
 Coveralls.wear!
-require File.expand_path('../lib/markety', File.dirname(__FILE__))
+
+require 'pry'
+require 'markety'
