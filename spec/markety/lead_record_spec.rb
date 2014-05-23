@@ -3,6 +3,8 @@ require File.expand_path('../spec_helper', File.dirname(__FILE__))
 module Markety
   EMAIL = 'some@email.com'
   IDNUM    = 93480938
+  
+  
 
   describe LeadRecord do
     it "should store the idnum" do
@@ -55,7 +57,41 @@ module Markety
       pairs.should include(['age', '99'])
       pairs.should include(['Email', EMAIL])
     end
-
+    
+    it 'should be instantiable from savon hash with no attributes' do
+      savon_hash = {
+        :id => IDNUM,
+        :email => EMAIL,
+        :foreign_sys_person_id => nil,
+        :foreign_sys_type => nil,
+        :lead_attribute_list => nil
+      }
+      
+      actual = LeadRecord.from_hash(savon_hash)
+      expected = LeadRecord.new(EMAIL, IDNUM)
+      
+      actual.should == expected
+    end
+    
+    # When there is only one attribute, Marketo returns a Hash, not an Array
+    it 'should be instantiable from savon hash with only one attribute' do
+      savon_hash = {
+        :id => IDNUM,
+        :email => EMAIL,
+        :foreign_sys_person_id => nil,
+        :foreign_sys_type => nil,
+        :lead_attribute_list => 
+          {:attribute => { :attr_name => 'FirstName', :attr_value => 'Yaya', :attr_type => 'string'}}
+      }
+      
+      actual = LeadRecord.from_hash(savon_hash)
+      
+      expected = LeadRecord.new(EMAIL, IDNUM)
+      expected.set_attribute('FirstName', 'Yaya')
+      
+      actual.should == expected
+    end
+    
     it "should be instantiable from a savon hash" do
       savon_hash = {
           :email => EMAIL,
