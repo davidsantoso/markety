@@ -107,24 +107,24 @@ module Markety
     end
 
     private
-      def list_operation(list_name, list_operation_type, idnum)
-        begin
-          response = send_request(:list_operation, {
-            list_operation: list_operation_type,
-            strict:         'false',
-            list_key: {
-              key_type: 'MKTOLISTNAME',
-              key_value: list_name
-            },
-            list_member_list: {
-              lead_key: [{
-                key_type: 'IDNUM',
-                key_value: idnum
-                }
-              ]
-            }
+
+    def list_operation(list_name, list_operation_type, idnum)
+      begin
+        response = send_request(:list_operation, {
+          list_operation: list_operation_type,
+          strict:         'false',
+          list_key: {
+            key_type: 'MKTOLISTNAME',
+            key_value: list_name
+          },
+          list_member_list: {
+            lead_key: [{
+              key_type: 'IDNUM',
+              key_value: idnum
+              }
+            ]
           }
-        )
+        })
         return response
       rescue Exception => e
         @logger.log(e) if @logger
