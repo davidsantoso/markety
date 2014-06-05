@@ -1,11 +1,14 @@
 module Markety
-  def self.new_client(access_key, secret_key, end_point)
+  def self.new_client(access_key, secret_key, end_point, options = {})
+    api_version = options.fetch(:api_version, '2_3')
+
     client = Savon.client do
       endpoint end_point
-      wsdl "http://app.marketo.com/soap/mktows/2_3?WSDL"
+      wsdl "http://app.marketo.com/soap/mktows/#{api_version}?WSDL"
       env_namespace "SOAP-ENV"
       namespaces({"xmlns:ns1" => "http://www.marketo.com/mktows/"})
       pretty_print_xml true
+      log false if options[:log] == false
     end
 
     Client.new(client, Markety::AuthenticationHeader.new(access_key, secret_key))
@@ -106,24 +109,24 @@ module Markety
     end
 
     private
-      def list_operation(list_name, list_operation_type, idnum)
-        begin
-          response = send_request(:list_operation, {
-            list_operation: list_operation_type,
-            strict:         'false',
-            list_key: {
-              key_type: 'MKTOLISTNAME',
-              key_value: list_name
-            },
-            list_member_list: {
-              lead_key: [{
-                key_type: 'IDNUM',
-                key_value: idnum
-                }
-              ]
-            }
+
+    def list_operation(list_name, list_operation_type, idnum)
+      begin
+        response = send_request(:list_operation, {
+          list_operation: list_operation_type,
+          strict:         'false',
+          list_key: {
+            key_type: 'MKTOLISTNAME',
+            key_value: list_name
+          },
+          list_member_list: {
+            lead_key: [{
+              key_type: 'IDNUM',
+              key_value: idnum
+              }
+            ]
           }
-        )
+        })
         return response
       rescue Exception => e
         @logger.log(e) if @logger
