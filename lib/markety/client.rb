@@ -1,8 +1,10 @@
 module Markety
   def self.new_client(access_key, secret_key, end_point, options = {})
+    api_version = options.fetch(:api_version, '2_3')
+
     client = Savon.client do
       endpoint end_point
-      wsdl "http://app.marketo.com/soap/mktows/2_3?WSDL"
+      wsdl "http://app.marketo.com/soap/mktows/#{api_version}?WSDL"
       env_namespace "SOAP-ENV"
       namespaces({"xmlns:ns1" => "http://www.marketo.com/mktows/"})
       pretty_print_xml true
