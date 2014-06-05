@@ -47,3 +47,10 @@ client.remove_from_list('The_List_Name', lead.idnum)
 
 [1] Note that [the Marketo API does not let you create custom fields] (https://community.marketo.com/MarketoDiscussionDetail?id=90650000000PpyEAAS#j_id0:j_id2:j_id9:j_id10:apexideas:j_id248) at this time. In order to set a custom attribute through the API, it must first be added from the Admin interface.  
 _(Admin » Field Management » New Custom Field)_
+
+##  Options
+
+```ruby
+# Turn of Savon logging - logging is helpful during development, but outputs a lot of text which you may not want in production
+client = Markety.new_client(USER_ID, ENCRYPTION_KEY, END_POINT, { log: false })
+```
