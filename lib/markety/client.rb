@@ -35,10 +35,14 @@ module Markety
     end
 
     def sync_lead(lead, sync_method)
+      raise "missing sync method" unless sync_method
+
       request_hash = {
         return_lead: true,
         lead_record: {
-          lead_attribute_list: lead.attributes_soap_array
+          lead_attribute_list: {
+            attribute: lead.attributes_soap_array
+          }
         }
       }
 
@@ -53,12 +57,12 @@ module Markety
             request_hash[:lead_record]["foreignSysPersonId"] = lead.foreign_sys_person_id
           when SyncMethod::EMAIL
             raise "lead has no email" unless lead.email
-            request_hash[:lead_record]["Email"] = lead.email
-            use_email_as_attr = false
+          else
+            raise "unrecognized Markety::SyncMethod '#{sync_method}'"
         end
-
-        request_hash[:lead_record][:lead_attribute_list] = lead.attributes_soap_array()
+        request_hash[:lead_record]["Email"] = lead.email
         
+        response = send_request(:sync_lead, request_hash)
         return Lead.from_hash(response[:success_sync_lead][:result][:lead_record])
 
       rescue Exception => e
@@ -109,7 +113,7 @@ module Markety
     def get_lead(lead_key)
       begin
         response = send_request(:get_lead, {"leadKey" => lead_key.to_hash})
-        return LeadRecord.from_hash(response[:success_get_lead][:result][:lead_record_list][:lead_record])
+        return Lead.from_hash(response[:success_get_lead][:result][:lead_record_list][:lead_record])
       rescue Exception => e
         @logger.log(e) if @logger
         return nil

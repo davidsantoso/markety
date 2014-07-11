@@ -56,7 +56,7 @@ module Markety
 
 
     def attributes_soap_array()
-      arr = {}
+      arr = []
       @attributes.each_pair do |name,value|
         arr << {attr_name: name, attr_value: value, attr_type: self.get_attribute_type(name)}
       end
