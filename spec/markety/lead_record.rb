@@ -6,22 +6,22 @@ module Markety
   
   
 
-  describe LeadRecord do
+  describe Lead do
     it "should store the idnum" do
-      lead_record = LeadRecord.new(EMAIL, IDNUM)
+      lead_record = Lead.new(EMAIL, IDNUM)
       lead_record.idnum.should == IDNUM
     end
 
     it "should store the email" do
-      LeadRecord.new(EMAIL, IDNUM).email.should == EMAIL
+      Lead.new(EMAIL, IDNUM).email.should == EMAIL
     end
 
     it "should implement == sensibly" do
-      lead_record1 = LeadRecord.new(EMAIL, IDNUM)
+      lead_record1 = Lead.new(EMAIL, IDNUM)
       lead_record1.set_attribute('favourite color', 'red')
       lead_record1.set_attribute('age', '100')
 
-      lead_record2 = LeadRecord.new(EMAIL, IDNUM)
+      lead_record2 = Lead.new(EMAIL, IDNUM)
       lead_record2.set_attribute('favourite color', 'red')
       lead_record2.set_attribute('age', '100')
 
@@ -29,20 +29,20 @@ module Markety
     end
 
     it "should store when attributes are set" do
-      lead_record = LeadRecord.new(EMAIL, IDNUM)
+      lead_record = Lead.new(EMAIL, IDNUM)
       lead_record.set_attribute('favourite color', 'red')
       lead_record.get_attribute('favourite color').should == 'red'
     end
 
     it "should store when attributes are updated" do
-      lead_record = LeadRecord.new(EMAIL, IDNUM)
+      lead_record = Lead.new(EMAIL, IDNUM)
       lead_record.set_attribute('favourite color', 'red')
       lead_record.set_attribute('favourite color', 'green')
       lead_record.get_attribute('favourite color').should == 'green'
     end
 
     it "should yield all attributes through each_attribute_pair" do
-      lead_record = LeadRecord.new(EMAIL, IDNUM)
+      lead_record = Lead.new(EMAIL, IDNUM)
       lead_record.set_attribute('favourite color', 'red')
       lead_record.set_attribute('favourite color', 'green')
       lead_record.set_attribute('age', '99')
@@ -67,8 +67,8 @@ module Markety
         :lead_attribute_list => nil
       }
       
-      actual = LeadRecord.from_hash(savon_hash)
-      expected = LeadRecord.new(EMAIL, IDNUM)
+      actual = Lead.from_hash(savon_hash)
+      expected = Lead.new(EMAIL, IDNUM)
       
       actual.should == expected
     end
@@ -84,9 +84,9 @@ module Markety
           {:attribute => { :attr_name => 'FirstName', :attr_value => 'Yaya', :attr_type => 'string'}}
       }
       
-      actual = LeadRecord.from_hash(savon_hash)
+      actual = Lead.from_hash(savon_hash)
       
-      expected = LeadRecord.new(EMAIL, IDNUM)
+      expected = Lead.new(EMAIL, IDNUM)
       expected.set_attribute('FirstName', 'Yaya')
       
       actual.should == expected
@@ -107,9 +107,9 @@ module Markety
           :id => IDNUM
       }
 
-      actual = LeadRecord.from_hash(savon_hash)
+      actual = Lead.from_hash(savon_hash)
 
-      expected = LeadRecord.new(EMAIL, IDNUM)
+      expected = Lead.new(EMAIL, IDNUM)
       expected.set_attribute('Company', 'Yaya')
       expected.set_attribute('FirstName', 'James')
       expected.set_attribute('LastName', 'O\'Brien')

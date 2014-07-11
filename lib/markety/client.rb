@@ -26,7 +26,6 @@ module Markety
       get_lead(LeadKey.new(LeadKeyType::IDNUM, idnum))
     end
 
-
     def get_lead_by_email(email)
       get_lead(LeadKey.new(LeadKeyType::EMAIL, email))
     end
@@ -35,66 +34,39 @@ module Markety
       @logger = logger
     end
 
-    def sync_lead(email, first, last, company, mobile)
-      lead_record = LeadRecord.new(email)
-      lead_record.set_attribute('FirstName', first)
-      lead_record.set_attribute('LastName', last)
-      lead_record.set_attribute('Email', email)
-      lead_record.set_attribute('Company', company)
-      lead_record.set_attribute('MobilePhone', mobile)
-      sync_lead_record(lead_record)
-    end
+    def sync_lead(lead, sync_method)
+      request_hash = {
+        return_lead: true,
+        lead_record: {
+          lead_attribute_list: lead.attributes_soap_array
+        }
+      }
 
-    def sync_lead_record(lead_record)
       begin
-        attributes = []
-        lead_record.each_attribute_pair do |name, value|
-          attributes << {attr_name: name, attr_value: value, attr_type: lead_record.get_attribute_type(name) }
+        case sync_method
+          when SyncMethod::MARKETO_ID
+            raise "lead has no idnum" unless lead.idnum
+            request_hash[:lead_record][:id] = lead.idnum
+            request_hash[:lead_record]["foreignSysPersonId"] = lead.foreign_sys_person_id if lead.foreign_sys_person_id
+          when SyncMethod::FOREIGN_ID
+            raise "lead has no foreign_sys_person_id" unless lead.foreign_sys_person_id
+            request_hash[:lead_record]["foreignSysPersonId"] = lead.foreign_sys_person_id
+          when SyncMethod::EMAIL
+            raise "lead has no email" unless lead.email
+            request_hash[:lead_record]["Email"] = lead.email
+            use_email_as_attr = false
         end
 
-        response = send_request(:sync_lead, {
-          return_lead: true,
-          lead_record: {
-            email: lead_record.email,
-            lead_attribute_list: {
-              attribute: attributes
-            }
-          }
-        })
+        request_hash[:lead_record][:lead_attribute_list] = lead.attributes_soap_array()
+        
+        return Lead.from_hash(response[:success_sync_lead][:result][:lead_record])
 
-        return LeadRecord.from_hash(response[:success_sync_lead][:result][:lead_record])
       rescue Exception => e
         @logger.log(e) if @logger
         return nil
       end
     end
 
-    def sync_lead_record_on_id(lead_record)
-      idnum = lead_record.idnum
-      raise 'lead record id not set' if idnum.nil?
-
-      begin
-        attributes = []
-        lead_record.each_attribute_pair do |name, value|
-          attributes << {attr_name: name, attr_value: value}
-        end
-
-        attributes << {attr_name: 'Id', attr_type: 'string', attr_value: idnum.to_s}
-
-        response = send_request(:sync_lead, {
-          return_lead: true,
-          lead_record:
-          {
-            lead_attribute_list: { attribute: attributes},
-            id: idnum
-          }
-        })
-        return LeadRecord.from_hash(response[:success_sync_lead][:result][:lead_record])
-      rescue Exception => e
-        @logger.log(e) if @logger
-        return nil
-      end
-    end
 
     def add_to_list(list_name, idnum)
       list_operation(list_name, ListOperationType::ADD_TO, idnum)

@@ -1,18 +1,26 @@
 module Markety
   # Represents a record of the data known about a lead within marketo
-  class LeadRecord
-    attr_reader :types
+  class Lead
+    attr_reader :types, :foreign_sys_person_id, :idnum, :email
 
-    def initialize(email, idnum = nil)
+    def initialize(email:nil, idnum:nil, foreign_sys_person_id:nil)
       @idnum      = idnum
+      @foreign_sys_person_id = foreign_sys_person_id
+      @email = email
       @attributes = {}
       @types      = {}
-      set_attribute('Email', email)
+    end
+
+    def ==(other)
+      @attributes==other.attributes &&
+      @idnum==other.idnum &&
+      @email==other.email &&
+      @foreign_sys_person_id==other.foreign_sys_person_id
     end
 
     # hydrates an instance from a savon hash returned form the marketo API
     def self.from_hash(savon_hash)
-      lead_record = LeadRecord.new(savon_hash[:email], savon_hash[:id].to_i)
+      lead = Lead.new(email: savon_hash[:email], idnum:savon_hash[:id].to_i)
       
       unless savon_hash[:lead_attribute_list].nil?
         if savon_hash[:lead_attribute_list][:attribute].kind_of? Hash
@@ -22,26 +30,13 @@ module Markety
         end
         
         attributes.each do |attribute|
-          lead_record.set_attribute(attribute[:attr_name], attribute[:attr_value], attribute[:attr_type])
+          lead.set_attribute(attribute[:attr_name], attribute[:attr_value], attribute[:attr_type])
         end
       end
       
-      lead_record
+      lead
     end
 
-    # get the record idnum
-    def idnum
-      @idnum
-    end
-
-    # get the record email
-    def email
-      get_attribute('Email')
-    end
-
-    def attributes
-      @attributes
-    end
 
     # update the value of the named attribute
     def set_attribute(name, value, type = "string")
@@ -58,16 +53,15 @@ module Markety
       @types[name]
     end
 
-    # will yield pairs of |attribute_name, attribute_value|
-    def each_attribute_pair(&block)
-      @attributes.each_pair do |name, value|
-        block.call(name, value)
+
+
+    def attributes_soap_array()
+      arr = {}
+      @attributes.each_pair do |name,value|
+        arr << {attr_name: name, attr_value: value, attr_type: self.get_attribute_type(name)}
       end
+      arr
     end
 
-    def ==(other)
-      @attributes == other.attributes &&
-      @idnum == other.idnum
-    end
   end
 end

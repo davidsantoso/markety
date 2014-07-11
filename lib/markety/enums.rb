@@ -18,4 +18,10 @@ module Markety
     SFDCLEADOWNERID = "SFDCLEADOWNERID"
     SFDCOPPTYID     = "SFDCOPPTYID"
   end
+
+  module SyncMethod
+    MARKETO_ID = "MARKETO_ID"
+    FOREIGN_ID = "FOREIGN_ID"
+    EMAIL = "EMAIL"
+  end
 end
