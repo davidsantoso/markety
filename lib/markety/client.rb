@@ -105,7 +105,8 @@ module Markety
     end
 
     def is_member_of_list?(list_name, idnum)
-      list_operation(list_name, ListOperationType::IS_MEMBER_OF, idnum)
+      response = list_operation(list_name, ListOperationType::IS_MEMBER_OF, idnum)
+      return response[:success_list_operation][:result][:status_list][:lead_status][:status]
     end
 
     private
