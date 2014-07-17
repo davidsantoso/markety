@@ -11,13 +11,19 @@ module Markety
       log false if options[:log] == false
     end
 
-    Client.new(client, Markety::AuthenticationHeader.new(access_key, secret_key))
+    auth_header = Markety::AuthenticationHeader.new(access_key, secret_key)
+
+    client_options = {}
+    client_options[:target_workspace] = options[:target_workspace] if options[:target_workspace]
+
+    Client.new(client, auth_header, client_options)
   end
 
   class Client
-    def initialize(savon_client, authentication_header)
+    def initialize(savon_client, authentication_header, options={})
       @client = savon_client
-      @header = authentication_header
+      @auth_header = authentication_header
+      @target_workspace = options[:target_workspace]
     end
 
     public
@@ -37,38 +43,48 @@ module Markety
     def sync_lead(lead, sync_method)
       raise "missing sync method" unless sync_method
 
+      case sync_method
+        when SyncMethod::MARKETO_ID
+          raise "lead has no idnum" unless lead.idnum
+        when SyncMethod::FOREIGN_ID
+          raise "lead has no foreign_sys_person_id" unless lead.foreign_sys_person_id
+        when SyncMethod::EMAIL
+          raise "lead has no email" unless lead.email
+        else
+          raise "unrecognized Markety::SyncMethod '#{sync_method}'"
+      end
+
+      # the fields must come in a very particular order, thus why this flow is a little janky
+
       request_hash = {
+        lead_record: { },
         return_lead: true,
-        lead_record: {
-          lead_attribute_list: {
-            attribute: lead.attributes_soap_array
-          }
-        }
       }
 
-      begin
-        case sync_method
-          when SyncMethod::MARKETO_ID
-            raise "lead has no idnum" unless lead.idnum
-            request_hash[:lead_record][:id] = lead.idnum
-            request_hash[:lead_record]["foreignSysPersonId"] = lead.foreign_sys_person_id if lead.foreign_sys_person_id
-          when SyncMethod::FOREIGN_ID
-            raise "lead has no foreign_sys_person_id" unless lead.foreign_sys_person_id
-            request_hash[:lead_record]["foreignSysPersonId"] = lead.foreign_sys_person_id
-          when SyncMethod::EMAIL
-            raise "lead has no email" unless lead.email
-          else
-            raise "unrecognized Markety::SyncMethod '#{sync_method}'"
-        end
-        request_hash[:lead_record]["Email"] = lead.email
-        
+      # id fields must come first in lead_record
+      request_hash[:lead_record][:id]=lead.idnum if sync_method==SyncMethod::MARKETO_ID
+
+      use_foreign_id = lead.foreign_sys_person_id && [SyncMethod::MARKETO_ID,SyncMethod::FOREIGN_ID].include?(sync_method)
+      request_hash[:lead_record][:foreignSysPersonId]=lead.foreign_sys_person_id if use_foreign_id
+
+      request_hash[:lead_record]["Email"]=lead.email if lead.email
+
+      # now lead attributes (which must be ordered name/type/value (type is optional, but must precede value if present)
+
+      request_hash[:lead_record][:lead_attribute_list] = { attribute: lead.attributes_soap_array }
+
+puts "=========="
+puts request_hash.inspect
+puts "=========="
+
+#      begin
         response = send_request(:sync_lead, request_hash)
         return Lead.from_hash(response[:success_sync_lead][:result][:lead_record])
 
-      rescue Exception => e
-        @logger.log(e) if @logger
-        return nil
-      end
+#      rescue Exception => e
+#        @logger.log(e) if @logger
+#        return nil
+#      end
     end
 
 
@@ -121,8 +137,14 @@ module Markety
     end
 
     def send_request(namespace, message)
-      @header.set_time(DateTime.now)
-      response = request(namespace, message, @header.to_hash)
+      @auth_header.set_time(DateTime.now)
+
+      header_hash = @auth_header.to_hash
+      if namespace==:sync_lead && @target_workspace
+        header_hash.merge!({ "ns1:MktowsContextHeader"=>{"targetWorkspace"=>@target_workspace}})
+      end
+
+      response = request(namespace, message, header_hash)
       response.to_hash
     end
 
