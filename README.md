@@ -1,12 +1,10 @@
 # Markety
 
-[![Build Status](https://travis-ci.org/davidsantoso/markety.svg?branch=master)](https://travis-ci.org/davidsantoso/markety)
-[![Gem Version](https://badge.fury.io/rb/markety.svg)](http://badge.fury.io/rb/markety)
-[![Coverage Status](https://coveralls.io/repos/davidsantoso/markety/badge.png)](https://coveralls.io/r/davidsantoso/markety)
+# This is a somewhat heavily-modified fork of [David Santoso's gem](https://github.com/davidsantoso/markety).
 
-Easily integrate with the Marketo SOAP API to find and update leads.
+I haven't decided what will happen with these changes beyond my immediate need.
+I might contribute back, I might fork a new gem, or I might forget it.  Dunno.
 
-This is a fork off of the [Rapleaf marketo_gem] (https://github.com/Rapleaf/marketo_gem) but has been updated to work with Savon v2.3.1. It makes connecting to your Marketo database to find and update leads a snap. If you're having problems connecting to Marketo, please submit an issue as there have been lots of changes with [Savon] (https://github.com/savonrb/savon) lately.
 
 ## Install
 Add this your Gemfile:
@@ -18,6 +16,8 @@ gem 'markety'
 and run bundle install.
 
 ##  Examples
+
+**SOME OF THE BELOW MIGHT HAVE GOTTEN CHANGED IN THIS FORK.  DON'T TRUST ANYTHING.**
 
 ```ruby
 # Instantiate a new Markety client using your Marketo SOAP endpoint, User ID, and Encryption Key
