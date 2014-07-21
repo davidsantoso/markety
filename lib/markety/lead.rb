@@ -1,7 +1,8 @@
 module Markety
   # Represents a record of the data known about a lead within marketo
   class Lead
-    attr_reader :types, :foreign_sys_person_id, :idnum, :email
+    attr_reader :types, :idnum
+    attr_accessor :foreign_sys_person_id, :email
 
     def initialize(email:nil, idnum:nil, foreign_sys_person_id:nil)
       @idnum      = idnum

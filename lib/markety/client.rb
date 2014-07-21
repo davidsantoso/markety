@@ -41,6 +41,13 @@ module Markety
     end
 
     def sync_lead(lead, sync_method)
+      request_hash = create_sync_lead_request_hash(lead,sync_method)
+
+      response = send_request(:sync_lead, request_hash)
+      return Lead.from_hash(response[:success_sync_lead][:result][:lead_record])
+    end
+
+    def create_sync_lead_request_hash(lead, sync_method)
       raise "missing sync method" unless sync_method
 
       case sync_method
@@ -55,7 +62,6 @@ module Markety
       end
 
       # the fields must come in a very particular order, thus why this flow is a little janky
-
       request_hash = {
         lead_record: { },
         return_lead: true,
@@ -63,28 +69,17 @@ module Markety
 
       # id fields must come first in lead_record
       request_hash[:lead_record][:id]=lead.idnum if sync_method==SyncMethod::MARKETO_ID
-
       use_foreign_id = lead.foreign_sys_person_id && [SyncMethod::MARKETO_ID,SyncMethod::FOREIGN_ID].include?(sync_method)
       request_hash[:lead_record][:foreignSysPersonId]=lead.foreign_sys_person_id if use_foreign_id
-
       request_hash[:lead_record]["Email"]=lead.email if lead.email
 
       # now lead attributes (which must be ordered name/type/value (type is optional, but must precede value if present)
-
       request_hash[:lead_record][:lead_attribute_list] = { attribute: lead.attributes_soap_array }
 
 puts "=========="
 puts request_hash.inspect
 puts "=========="
-
-#      begin
-        response = send_request(:sync_lead, request_hash)
-        return Lead.from_hash(response[:success_sync_lead][:result][:lead_record])
-
-#      rescue Exception => e
-#        @logger.log(e) if @logger
-#        return nil
-#      end
+      request_hash
     end
 
 
