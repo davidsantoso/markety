@@ -36,10 +36,6 @@ module Markety
       get_lead(LeadKey.new(LeadKeyType::EMAIL, email))
     end
 
-    def set_logger(logger)
-      @logger = logger
-    end
-
     def sync_lead(lead, sync_method)
       request_hash = create_sync_lead_request_hash(lead,sync_method)
 
@@ -98,37 +94,27 @@ puts "=========="
     private
 
     def list_operation(list_name, list_operation_type, idnum)
-      begin
-        response = send_request(:list_operation, {
-          list_operation: list_operation_type,
-          strict:         'false',
-          list_key: {
-            key_type: 'MKTOLISTNAME',
-            key_value: list_name
-          },
-          list_member_list: {
-            lead_key: [{
-              key_type: 'IDNUM',
-              key_value: idnum
-              }
-            ]
-          }
-        })
-        return response
-      rescue Exception => e
-        @logger.log(e) if @logger
-        return nil
-      end
+      response = send_request(:list_operation, {
+        list_operation: list_operation_type,
+        strict:         'false',
+        list_key: {
+          key_type: 'MKTOLISTNAME',
+          key_value: list_name
+        },
+        list_member_list: {
+          lead_key: [{
+            key_type: 'IDNUM',
+            key_value: idnum
+            }
+          ]
+        }
+      })
+      return response
     end
 
     def get_lead(lead_key)
-      begin
-        response = send_request(:get_lead, {"leadKey" => lead_key.to_hash})
-        return Lead.from_hash(response[:success_get_lead][:result][:lead_record_list][:lead_record])
-      rescue Exception => e
-        @logger.log(e) if @logger
-        return nil
-      end
+      response = send_request(:get_lead, {"leadKey" => lead_key.to_hash})
+      return Lead.from_hash(response[:success_get_lead][:result][:lead_record_list][:lead_record])
     end
 
     def send_request(namespace, message)
