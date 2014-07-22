@@ -20,6 +20,8 @@ module Markety
   end
 
   class Client
+    attr_reader :target_workspace
+
     def initialize(savon_client, authentication_header, options={})
       @client = savon_client
       @auth_header = authentication_header
