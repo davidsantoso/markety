@@ -6,7 +6,7 @@
 
 Easily integrate with the Marketo SOAP API to find and update leads.
 
-This is a fork off of the [Rapleaf marketo_gem] (https://github.com/Rapleaf/marketo_gem) but has been updated to work with Savon v2.3.1. It makes connecting to your Marketo database to find and update leads a snap. If you're having problems connecting to Marketo, please submit an issue as there have been lots of changes with [Savon] (https://github.com/savonrb/savon) lately.
+This is a fork off of the [Rapleaf marketo_gem] (https://github.com/Rapleaf/marketo_gem) but has been updated to work with Savon v2.3.1. It makes connecting to your Marketo database to find and update leads a snap.
 
 ## Install
 Add this your Gemfile:
