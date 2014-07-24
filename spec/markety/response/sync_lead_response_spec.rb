@@ -71,7 +71,7 @@ END
         r = SyncLeadResponse.new(savon_resp)
 
         # GenericResponse fields
-        r.success.should == true
+        r.success?.should == true
         r.error_message.should be_nil
         # to_xml
         # to_hash
@@ -88,7 +88,7 @@ END
         r = SyncLeadResponse.new(savon_resp)
 
         # GenericResponse fields
-        r.success.should == false
+        r.success?.should == false
         r.error_message.should == "syncLead operation failed: unknown fields for import: pants (20105)"
         # to_xml
         # to_hash

@@ -8,7 +8,7 @@ class SyncLeadResponse < GenericResponse
     super(:sync_response,response)
     h = self.to_hash
 
-    if @success
+    if self.success?
       sync_status = h[:success_sync_lead][:result][:sync_status]
       @lead_id = sync_status[:lead_id]
       @update_type = sync_status[:status].downcase.to_sym
