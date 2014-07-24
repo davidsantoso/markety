@@ -1,5 +1,5 @@
 module Markety
 
-  VERSION = "1-grantfork"
+  VERSION = "1.0"
 
 end
