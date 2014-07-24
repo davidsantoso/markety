@@ -1,3 +1,6 @@
+require 'markety/command'
+require 'markety/response'
+
 module Markety
   def self.new_client(access_key, secret_key, end_point, options = {})
     api_version = options.fetch(:api_version, '2_3')
@@ -20,6 +23,8 @@ module Markety
   end
 
   class Client
+    include Markety::Command::SyncLead
+
     attr_reader :target_workspace
 
     def initialize(savon_client, authentication_header, options={})
@@ -38,47 +43,7 @@ module Markety
       get_lead(LeadKey.new(LeadKeyType::EMAIL, email))
     end
 
-    def sync_lead(lead, sync_method)
-      request_hash = create_sync_lead_request_hash(lead,sync_method)
 
-      response = send_request(:sync_lead, request_hash)
-      return Lead.from_hash(response[:success_sync_lead][:result][:lead_record])
-    end
-
-    def create_sync_lead_request_hash(lead, sync_method)
-      raise "missing sync method" unless sync_method
-
-      case sync_method
-        when SyncMethod::MARKETO_ID
-          raise "lead has no idnum" unless lead.idnum
-        when SyncMethod::FOREIGN_ID
-          raise "lead has no foreign_sys_person_id" unless lead.foreign_sys_person_id
-        when SyncMethod::EMAIL
-          raise "lead has no email" unless lead.email
-        else
-          raise "unrecognized Markety::SyncMethod '#{sync_method}'"
-      end
-
-      # the fields must come in a very particular order, thus why this flow is a little janky
-      request_hash = {
-        lead_record: { },
-        return_lead: true,
-      }
-
-      # id fields must come first in lead_record
-      request_hash[:lead_record][:id]=lead.idnum if sync_method==SyncMethod::MARKETO_ID
-      use_foreign_id = lead.foreign_sys_person_id && [SyncMethod::MARKETO_ID,SyncMethod::FOREIGN_ID].include?(sync_method)
-      request_hash[:lead_record][:foreignSysPersonId]=lead.foreign_sys_person_id if use_foreign_id
-      request_hash[:lead_record]["Email"]=lead.email if lead.email
-
-      # now lead attributes (which must be ordered name/type/value (type is optional, but must precede value if present)
-      request_hash[:lead_record][:lead_attribute_list] = { attribute: lead.attributes_soap_array }
-
-puts "=========="
-puts request_hash.inspect
-puts "=========="
-      request_hash
-    end
 
 
     def add_to_list(list_name, idnum)
@@ -119,20 +84,24 @@ puts "=========="
       return Lead.from_hash(response[:success_get_lead][:result][:lead_record_list][:lead_record])
     end
 
-    def send_request(namespace, message)
+    def send_request(cmd_type, message)
       @auth_header.set_time(DateTime.now)
 
       header_hash = @auth_header.to_hash
-      if namespace==:sync_lead && @target_workspace
+      if cmd_type==:sync_lead && @target_workspace
         header_hash.merge!({ "ns1:MktowsContextHeader"=>{"targetWorkspace"=>@target_workspace}})
       end
 
-      response = request(namespace, message, header_hash)
-      response.to_hash
+      begin
+        response = request(cmd_type, message, header_hash) #returns a Savon::Response
+      rescue Savon::SOAPFault => e
+        response = e
+      end
+      ResponseFactory.create_response(cmd_type,response)
     end
 
-    def request(namespace, message, header)
-      @client.call(namespace, message: message, soap_header: header)
+    def request(cmd_type, message, header)
+      @client.call(cmd_type, message: message, soap_header: header)
     end
   end
 end
