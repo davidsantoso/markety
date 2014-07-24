@@ -1,5 +1,5 @@
 module Markety
 
-  VERSION = "grantfork"
+  VERSION = "1-grantfork"
 
 end
