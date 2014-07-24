@@ -58,7 +58,8 @@ module Markety
       list_operation(list_name, ListOperationType::IS_MEMBER_OF, idnum)
     end
 
-    private
+
+  private
 
     def list_operation(list_name, list_operation_type, idnum)
       response = send_request(:list_operation, {
