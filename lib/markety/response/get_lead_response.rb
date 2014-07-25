@@ -9,8 +9,6 @@ class GetLeadResponse < GenericResponse
     h = self.to_hash
     @leads = []
 
-puts ">>>"+h.inspect
-
     if self.success?
       count = h[:success_get_lead][:result][:count].to_i
       lead_hashes = h[:success_get_lead][:result][:lead_record_list][:lead_record]
