@@ -4,7 +4,7 @@ module Markety
   module Response
     describe SyncLeadResponse do
 
-      SUCCESS_XML = <<END
+      let(:success_xml) { <<END
 <?xml version="1.0" encoding="UTF-8"?>
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns1="http://www.marketo.com/mktows/">
   <SOAP-ENV:Body>
@@ -44,8 +44,9 @@ module Markety
   </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
 END
+      }
 
-      FAILURE_XML = <<END
+      let(:failure_xml) { <<END
 <?xml version="1.0" encoding="UTF-8"?>
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
   <SOAP-ENV:Body>
@@ -63,10 +64,12 @@ END
   </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
 END
+      }
+
 
 
       it 'can construct from a success' do
-        savon_resp = SavonHelper.create_response(SUCCESS_XML)
+        savon_resp = SavonHelper.create_response(success_xml)
 
         r = SyncLeadResponse.new(savon_resp)
 
@@ -83,7 +86,7 @@ END
       end
 
       it 'can construct from a failure' do
-        savon_resp = SavonHelper.create_response(FAILURE_XML)
+        savon_resp = SavonHelper.create_response(failure_xml)
 
         r = SyncLeadResponse.new(savon_resp)
 

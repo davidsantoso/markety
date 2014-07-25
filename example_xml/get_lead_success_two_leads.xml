@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns1="http://www.marketo.com/mktows/">
+  <SOAP-ENV:Body>
+    <ns1:successGetLead>
+      <result>
+        <count>2</count>
+        <leadRecordList>
+          <leadRecord>
+            <Id>1001084</Id>
+            <Email>foo@example.com</Email>
+            <ForeignSysPersonId xsi:nil="true"/>
+            <ForeignSysType xsi:nil="true"/>
+            <leadAttributeList>
+              <attribute>
+                <attrName>Company</attrName>
+                <attrType>string</attrType>
+                <attrValue>The Price is Right</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>FirstName</attrName>
+                <attrType>string</attrType>
+                <attrValue>Bob</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>LastName</attrName>
+                <attrType>string</attrType>
+                <attrValue>Barker</attrValue>
+              </attribute>
+            </leadAttributeList>
+          </leadRecord>
+          <leadRecord>
+            <Id>1001081</Id>
+            <Email>foo@example.com</Email>
+            <ForeignSysPersonId xsi:nil="true"/>
+            <ForeignSysType xsi:nil="true"/>
+            <leadAttributeList>
+              <attribute>
+                <attrName>Company</attrName>
+                <attrType>string</attrType>
+                <attrValue>foo</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>FirstName</attrName>
+                <attrType>string</attrType>
+                <attrValue>foo</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>LastName</attrName>
+                <attrType>string</attrType>
+                <attrValue>foo</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>LeadStatus</attrName>
+                <attrType>string</attrType>
+                <attrValue>Inactive</attrValue>
+              </attribute>
+            </leadAttributeList>
+          </leadRecord>
+        </leadRecordList>
+      </result>
+    </ns1:successGetLead>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

@@ -23,6 +23,7 @@ module Markety
   end
 
   class Client
+    include Markety::Command::GetLead
     include Markety::Command::SyncLead
 
     attr_reader :target_workspace
@@ -33,15 +34,8 @@ module Markety
       @target_workspace = options[:target_workspace]
     end
 
-    public
 
-    def get_lead_by_idnum(idnum)
-      get_lead(LeadKey.new(LeadKeyType::IDNUM, idnum))
-    end
 
-    def get_lead_by_email(email)
-      get_lead(LeadKey.new(LeadKeyType::EMAIL, email))
-    end
 
 
 
@@ -80,10 +74,6 @@ module Markety
       return response
     end
 
-    def get_lead(lead_key)
-      response = send_request(:get_lead, {"leadKey" => lead_key.to_hash})
-      return Lead.from_hash(response[:success_get_lead][:result][:lead_record_list][:lead_record])
-    end
 
     def send_request(cmd_type, message)
       @auth_header.set_time(DateTime.now)
