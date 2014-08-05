@@ -57,4 +57,4 @@ client = Markety.new_client(USER_ID, ENCRYPTION_KEY, END_POINT, { log: false })
 
 ##  Marketo Lead REST API
 
-Marketo is releasing a new REST API to manage leads on June 20, 2014 so be sure to check developers.marketo.com after that date for another lead management integration possibility. Markety will still be under active development for other Marketo API actions that are not yet supported with their REST API.
+Marketo released a lead REST API on June 20, 2014 so be sure to check developers.marketo.com for another lead management integration possibility. Markety will still be under active development for other Marketo API actions that are not yet supported with their REST API.
