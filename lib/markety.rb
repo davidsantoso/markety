@@ -1,4 +1,5 @@
 require 'savon'
+require 'logger'
 require 'markety/authentication_header'
 require 'markety/client'
 require 'markety/enums'
