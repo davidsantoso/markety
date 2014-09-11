@@ -21,7 +21,10 @@ module Markety
             raise "unrecognized Markety::SyncMethod '#{sync_method}'"
         end
   
-        # the fields must come in a very particular order, thus why this flow is a little janky
+        # note from gbirchmeier:
+        #   A Marketo support guy told me the fields must come in a very particular order, thus why this flow is a little janky.
+        #   I've since come to doubt this advice, but I'm not going to fix something that's working.
+
         request_hash = {
           lead_record: { },
           return_lead: true,
