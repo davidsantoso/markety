@@ -19,7 +19,7 @@ module Markety
       @foreign_sys_person_id==other.foreign_sys_person_id
     end
 
-    # hydrates an instance from a savon hash returned form the marketo API
+    # hydrates an instance from a savon hash returned from the marketo API
     def self.from_hash(savon_hash)
       lead = Lead.new(email: savon_hash[:email], idnum:savon_hash[:id].to_i)
       
