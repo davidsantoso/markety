@@ -25,6 +25,7 @@ module Markety
   class Client
     include Markety::Command::GetLead
     include Markety::Command::SyncLead
+    include Markety::Command::ListOperation
 
     attr_reader :target_workspace
 
@@ -35,45 +36,7 @@ module Markety
     end
 
 
-
-
-
-
-
-    def add_to_list(list_name, idnum)
-      list_operation(list_name, ListOperationType::ADD_TO, idnum)
-    end
-
-    def remove_from_list(list_name, idnum)
-      list_operation(list_name, ListOperationType::REMOVE_FROM, idnum)
-    end
-
-    def is_member_of_list?(list_name, idnum)
-      list_operation(list_name, ListOperationType::IS_MEMBER_OF, idnum)
-    end
-
-
   private
-
-    def list_operation(list_name, list_operation_type, idnum)
-      response = send_request(:list_operation, {
-        list_operation: list_operation_type,
-        strict:         'false',
-        list_key: {
-          key_type: 'MKTOLISTNAME',
-          key_value: list_name
-        },
-        list_member_list: {
-          lead_key: [{
-            key_type: 'IDNUM',
-            key_value: idnum
-            }
-          ]
-        }
-      })
-      return response
-    end
-
 
     def send_request(cmd_type, message)
       @auth_header.set_time(DateTime.now)

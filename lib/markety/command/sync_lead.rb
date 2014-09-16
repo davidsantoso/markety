@@ -6,6 +6,8 @@ module Markety
         request_hash = create_sync_lead_request_hash(lead,sync_method)
         send_request(:sync_lead, request_hash)
       end
+
+    private
   
       def create_sync_lead_request_hash(lead, sync_method)
         raise "missing sync method" unless sync_method
@@ -22,8 +24,10 @@ module Markety
         end
   
         # note from gbirchmeier:
-        #   A Marketo support guy told me the fields must come in a very particular order, thus why this flow is a little janky.
-        #   I've since come to doubt this advice, but I'm not going to fix something that's working.
+        #   A Marketo support guy told me the fields must come in a very particular order,
+        #     thus why this flow is a little janky.
+        #   I've since come to doubt this advice (the Marketo support guys do not appear to
+        #     actually be very technical), but I'm not going to fix something that's not broke.
 
         request_hash = {
           lead_record: { },
