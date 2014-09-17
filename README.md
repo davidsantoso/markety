@@ -1,10 +1,16 @@
 # Markety
 
-# This is a somewhat heavily-modified fork of [David Santoso's gem](https://github.com/davidsantoso/markety).
+This is a heavily-modified fork of [David Santoso's gem](https://github.com/davidsantoso/markety).
 
-I haven't decided what will happen with these changes beyond my immediate need.
-I might contribute back, I might fork a new gem, or I might forget it.  Dunno.
+The plan is to PR it back to him, and it'll be version 2.
 
+<!--
+[![Build Status](https://travis-ci.org/davidsantoso/markety.svg?branch=master)](https://travis-ci.org/davidsantoso/markety)
+[![Gem Version](https://badge.fury.io/rb/markety.svg)](http://badge.fury.io/rb/markety)
+[![Coverage Status](https://coveralls.io/repos/davidsantoso/markety/badge.png)](https://coveralls.io/r/davidsantoso/markety)
+-->
+
+Easily integrate with the Marketo SOAP API to find and update leads.
 
 ## Install
 Add this your Gemfile:
