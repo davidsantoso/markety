@@ -1,7 +1,7 @@
 module Markety
   # Represents a record of the data known about a lead within marketo
   class Lead
-    attr_reader :types, :idnum
+    attr_reader :types, :idnum, :attributes
     attr_accessor :foreign_sys_person_id, :email
 
     def initialize(email:nil, idnum:nil, foreign_sys_person_id:nil)
@@ -13,7 +13,7 @@ module Markety
     end
 
     def ==(other)
-      @attributes==other.attributes &&
+      @attributes==other.send(:attributes) &&
       @idnum==other.idnum &&
       @email==other.email &&
       @foreign_sys_person_id==other.foreign_sys_person_id
