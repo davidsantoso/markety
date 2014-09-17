@@ -31,13 +31,13 @@ client = Markety.new_client(USER_ID, ENCRYPTION_KEY, END_POINT)
 client = Markety.new_client(USER_ID, ENCRYPTION_KEY, END_POINT, target_workspace: "ws_name")
 
 # Get leads from the Marketo database
-leads = client.get_lead_by_email("joe@example.com").leads
+leads = client.get_lead_by_email("joe@example.com").leads  #array
 
 # Update a lead record
 lead.set_attribute("Email", "joe-schmoe@example.com")
 
 # Update a lead record with an attribute that isn't a string
-lead.set_attribute("Activated", true, "Boolean") # [1]
+lead.set_attribute("Activated", true, "Boolean") # [1] see below
 
 # Sync the lead with Marketo
 response = client.sync_lead_record(lead)
