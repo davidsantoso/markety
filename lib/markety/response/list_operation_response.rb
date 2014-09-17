@@ -15,5 +15,7 @@ class ListOperationResponse < GenericResponse
   def list_operation_status?
     @list_operation_status
   end
+  alias list_op_status? list_operation_status?
+  alias lop_status? list_operation_status?
 
 end

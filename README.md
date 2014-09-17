@@ -38,6 +38,7 @@ response = client.sync_lead_record(lead)
 
 # Check if a lead is on a list
 client.is_member_of_list('The_List_Name', lead.idnum).list_operation_status? #true if on list
+# (alternately, you can use `list_op_status?` or `lop_status?` to save some keystrokes)
 
 # Add a lead to a particular list
 client.add_to_list('The_List_Name', lead.idnum).list_operation_status #true if successful add
