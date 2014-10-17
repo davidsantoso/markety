@@ -2,6 +2,8 @@ module Markety
   module Command
     module SyncLead
 
+      # Create a new lead or update an existing lead in Marketo.
+      # <tt>sync_method</tt> is a value from the SyncMethod enum.
       def sync_lead(lead, sync_method)
         request_hash = create_sync_lead_request_hash(lead,sync_method)
         send_request(:sync_lead, request_hash)
@@ -40,8 +42,8 @@ module Markety
         request_hash[:lead_record][:foreignSysPersonId]=lead.foreign_sys_person_id if use_foreign_id
         request_hash[:lead_record]["Email"]=lead.email if lead.email
   
-        # now lead attributes (which must be ordered name/type/value (type is optional, but must precede value if present)
-        request_hash[:lead_record][:lead_attribute_list] = { attribute: lead.attributes_soap_array }
+        # now lead attributes (which must be ordered name/type/value) (type is optional, but must precede value if present)
+        request_hash[:lead_record][:lead_attribute_list] = { attribute: lead.send(:attributes_soap_array) }
   
         request_hash
       end

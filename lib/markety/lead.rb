@@ -50,12 +50,13 @@ module Markety
       @attributes[name]
     end
 
+    # get the type of the named attribute
     def get_attribute_type(name)
       @types[name]
     end
 
 
-
+  private
     def attributes_soap_array()
       arr = []
       @attributes.each_pair do |name,value|
