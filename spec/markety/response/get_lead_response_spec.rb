@@ -163,7 +163,7 @@ END
         r.error_message.should == "No lead found with EMAIL = pants@example.com (20103)"
 
         # SyncLeadResponse fields
-        r.leads.empty?.should be_true
+        r.leads.empty?.should be true
       end
     end
   end

@@ -6,19 +6,22 @@ module Markety
     IS_MEMBER_OF = 'ISMEMBEROFLIST'
   end
 
-  # Types of keys that can be used to look up a lead
+  # Types of keys that can be used to look up a lead.
+  # (Other key types exist, but Markety only supports these at this time.)
   module LeadKeyType
     IDNUM           = "IDNUM"
-    COOKIE          = "COOKIE"
     EMAIL           = "EMAIL"
-    LEADOWNEREMAIL  = "LEADOWNEREMAIL"
-    SFDCACCOUNTID   = "SFDCACCOUNTID"
-    SFDCCONTACTID   = "SFDCCONTACTID"
-    SFDCLEADID      = "SFDCLEADID"
-    SFDCLEADOWNERID = "SFDCLEADOWNERID"
-    SFDCOPPTYID     = "SFDCOPPTYID"
+
+#    COOKIE          = "COOKIE"
+#    LEADOWNEREMAIL  = "LEADOWNEREMAIL"
+#    SFDCACCOUNTID   = "SFDCACCOUNTID"
+#    SFDCCONTACTID   = "SFDCCONTACTID"
+#    SFDCLEADID      = "SFDCLEADID"
+#    SFDCLEADOWNERID = "SFDCLEADOWNERID"
+#    SFDCOPPTYID     = "SFDCOPPTYID"
   end
 
+  # a parameter type to <tt>Markety::Command::SyncLead</tt>
   module SyncMethod
     MARKETO_ID = "MARKETO_ID"
     FOREIGN_ID = "FOREIGN_ID"

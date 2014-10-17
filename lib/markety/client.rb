@@ -2,6 +2,11 @@ require 'markety/command'
 require 'markety/response'
 
 module Markety
+
+  # Create the Markety client.  All requests will be sent via methods on the returned +Markety::Client+ object.
+  # Supported +options+:
+  # -> +:log+ (bool) - enable/disable Savon logging (default: true)
+  # -> +:target_workspace+ (string) - name of workspace to use, if any
   def self.new_client(access_key, secret_key, end_point, options = {})
     api_version = options.fetch(:api_version, '2_3')
 
@@ -29,6 +34,7 @@ module Markety
 
     attr_reader :target_workspace
 
+    # Don't use this; use <tt>Markety.new_client()</tt>
     def initialize(savon_client, authentication_header, options={})
       @client = savon_client
       @auth_header = authentication_header

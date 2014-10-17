@@ -4,14 +4,14 @@ module Markety
   describe LeadKeyType do
     it "should define the correct types" do
       LeadKeyType::IDNUM.should == 'IDNUM'
-      LeadKeyType::COOKIE.should == 'COOKIE'
       LeadKeyType::EMAIL.should == 'EMAIL'
-      LeadKeyType::LEADOWNEREMAIL.should == 'LEADOWNEREMAIL'
-      LeadKeyType::SFDCACCOUNTID.should == 'SFDCACCOUNTID'
-      LeadKeyType::SFDCCONTACTID.should == 'SFDCCONTACTID'
-      LeadKeyType::SFDCLEADID.should == 'SFDCLEADID'
-      LeadKeyType::SFDCLEADOWNERID.should == 'SFDCLEADOWNERID'
-      LeadKeyType::SFDCOPPTYID.should == 'SFDCOPPTYID'
+      #LeadKeyType::COOKIE.should == 'COOKIE'
+      #LeadKeyType::LEADOWNEREMAIL.should == 'LEADOWNEREMAIL'
+      #LeadKeyType::SFDCACCOUNTID.should == 'SFDCACCOUNTID'
+      #LeadKeyType::SFDCCONTACTID.should == 'SFDCCONTACTID'
+      #LeadKeyType::SFDCLEADID.should == 'SFDCLEADID'
+      #LeadKeyType::SFDCLEADOWNERID.should == 'SFDCLEADOWNERID'
+      #LeadKeyType::SFDCOPPTYID.should == 'SFDCOPPTYID'
     end
   end
 
