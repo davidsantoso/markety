@@ -1,11 +1,4 @@
 module Markety
-  # Types of operations you can do on a Marketo list
-  module ListOperationType
-    ADD_TO       = 'ADDTOLIST'
-    REMOVE_FROM  = 'REMOVEFROMLIST'
-    IS_MEMBER_OF = 'ISMEMBEROFLIST'
-  end
-
   # Types of keys that can be used to look up a lead.
   # (Other key types exist, but Markety only supports these at this time.)
   module LeadKeyType
