@@ -60,7 +60,7 @@ module Markety
       rescue Savon::SOAPFault => e
         response = e
       end
-      ResponseFactory.create_response(cmd_type,response)
+      Markety::Response::ResponseFactory.create_response(cmd_type,response)
     end
 
     def request(cmd_type, message, header)
