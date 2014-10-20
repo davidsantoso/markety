@@ -57,7 +57,7 @@ END
         r.success?.should == true
         r.error_message.should be_nil
 
-        r.list_operation_status?.should == true
+        r.list_operation_success?.should == true
       end
 
       it 'can construct from a failure' do
@@ -68,7 +68,7 @@ END
         r.success?.should == true
         r.error_message.should be_nil
 
-        r.list_operation_status?.should == false
+        r.list_operation_success?.should == false
       end
 
     end

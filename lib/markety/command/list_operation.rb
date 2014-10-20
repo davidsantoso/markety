@@ -1,24 +1,26 @@
 module Markety
   module Command
+    # ListOperation commands return Response::ListOperationResponse objects
+    #
+    # In all these functions:
+    # * An exception will be thrown if you pass in a Lead and it doesn't have an idnum
+    # * Allowed options:
+    #   [strict]  From {Marketo's docs}[http://developers.marketo.com/documentation/soap/listoperation/]: <em>Strict mode will fail for the entire operation if any subset of the call fails.  Non-strict mode will complete everything it can and return errors for anything that failed.</em>
+    #
+    # All ListOp failures look similar, and all successes look similar.
     module ListOperation
 
-      # In all these functions:
-      #   * The only expected option is "strict", a boolean.  Default: true
-      #   * If you pass in a Lead and it doesn't have an idnum, an exception will be thrown
-
-      # All ListOp failures are look similar, and all successes look similar.
-      # It doesn't matter which op, or why it succeeds or fails.
-
-      # note: If you add something already in the list, it's a success.
+      # note: If you add something that's already in the list, ListOperationResponse::list_operation_success? will be +true+
       def add_to_list(list_name, lead_or_idnum, options={})
         list_operation(list_name, ListOperationType::ADD_TO, lead_or_idnum, options)
       end
 
-      # note: If you remove something that's not in the list, it's a failure.
+      # note: If you remove something that's not in the list, ListOperationResponse::list_operation_success? will be +false+
       def remove_from_list(list_name, lead_or_idnum, options={})
         list_operation(list_name, ListOperationType::REMOVE_FROM, lead_or_idnum, options)
       end
 
+      # ListOperationResponse::list_operation_success? is the result of this query
       def is_member_of_list(list_name, lead_or_idnum, options={})
         list_operation(list_name, ListOperationType::IS_MEMBER_OF, lead_or_idnum, options)
       end

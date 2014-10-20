@@ -26,7 +26,5 @@ require 'markety/version'
 # *  Markety::Command::GetLead returns Markety::Response::GetLeadResponse
 # *  Markety::Command::ListOperation returns Markety::Response::ListOperationResponse
 # ... and so on
-
-
 module Markety
 end

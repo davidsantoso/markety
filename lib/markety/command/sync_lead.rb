@@ -1,9 +1,11 @@
 module Markety
   module Command
+    # SyncLead commands return Response::SyncResponse objects
     module SyncLead
 
       # Create a new lead or update an existing lead in Marketo.
-      # <tt>sync_method</tt> is a value from the SyncMethod enum.
+      # * +lead+ - the lead to create or sync
+      # * +sync_method+ - a SyncMethod enum value
       def sync_lead(lead, sync_method)
         request_hash = create_sync_lead_request_hash(lead,sync_method)
         send_request(:sync_lead, request_hash)

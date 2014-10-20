@@ -1,5 +1,5 @@
 module Markety
-  # Types of operations you can do on a marketo list
+  # Types of operations you can do on a Marketo list
   module ListOperationType
     ADD_TO       = 'ADDTOLIST'
     REMOVE_FROM  = 'REMOVEFROMLIST'
@@ -21,7 +21,7 @@ module Markety
 #    SFDCOPPTYID     = "SFDCOPPTYID"
   end
 
-  # a parameter type to <tt>Markety::Command::SyncLead</tt>
+  # a parameter type to Markety::Command::SyncLead
   module SyncMethod
     MARKETO_ID = "MARKETO_ID"
     FOREIGN_ID = "FOREIGN_ID"

@@ -1,5 +1,5 @@
 module Markety
-  # Represents a record of the data known about a lead within marketo
+  # Represents a record of the data known about a lead within Marketo
   class Lead
     attr_reader :types, :idnum, :attributes
     attr_accessor :foreign_sys_person_id, :email

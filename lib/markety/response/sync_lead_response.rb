@@ -3,8 +3,15 @@ require 'markety/response/generic_response'
 
 module Markety
   module Response
+    # Response class for SyncLead commands
     class SyncLeadResponse < GenericResponse
-      attr_reader :update_type, :updated_lead, :lead_id
+      
+      # +:created+ or +:updated+ (or nil if unsuccessful)
+      attr_reader :update_type
+      # the updated or created Lead (or nil if unsuccessful)
+      attr_reader :updated_lead
+      # the ID of the created or updated Lead (or nil if unsuccessful)
+      attr_reader :lead_id
 
       def initialize(response)
         super(:sync_response,response)

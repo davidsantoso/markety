@@ -5,8 +5,10 @@ require 'markety/response/list_operation_response'
 
 module Markety
   module Response
+    # Factory that creates the appropriate Response object depending on the command type
     class ResponseFactory
 
+      # Create the appropriate Response object depending on the command type
       def self.create_response(cmd_type,savon_response)
         case cmd_type
           when :get_lead
