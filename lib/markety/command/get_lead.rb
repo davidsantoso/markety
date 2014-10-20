@@ -1,7 +1,8 @@
 module Markety
   module Command
-    module GetLead
 
+    # GetLead commands return Response::GetLeadResponse objects
+    module GetLead
 
       def get_lead_by_idnum(idnum)
         get_lead(LeadKey.new(LeadKeyType::IDNUM, idnum))

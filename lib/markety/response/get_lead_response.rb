@@ -3,7 +3,9 @@ require 'markety/response/generic_response'
 
 module Markety
   module Response
+    # Response class for Command::GetLead calls.
     class GetLeadResponse < GenericResponse
+      # Array of leads returned by the GetLead command
       attr_reader :leads
 
       def initialize(response)

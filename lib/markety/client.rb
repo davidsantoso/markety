@@ -4,9 +4,11 @@ require 'markety/response'
 module Markety
 
   # Create the Markety client.  All requests will be sent via methods on the returned +Markety::Client+ object.
+  #
   # Supported +options+:
-  # -> +:log+ (bool) - enable/disable Savon logging (default: true)
-  # -> +:target_workspace+ (string) - name of workspace to use, if any
+  #
+  # * +:log+ (bool) - enable/disable Savon logging (default: true)
+  # * +:target_workspace+ (string) - name of workspace to use, if any
   def self.new_client(access_key, secret_key, end_point, options = {})
     api_version = options.fetch(:api_version, '2_3')
 
@@ -27,6 +29,7 @@ module Markety
     Client.new(client, auth_header, client_options)
   end
 
+  # All of the Markety::Command modules are mixed in to Client, so see the documentation for those modules.
   class Client
     include Markety::Command::GetLead
     include Markety::Command::SyncLead
