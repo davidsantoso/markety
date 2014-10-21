@@ -23,6 +23,13 @@ module Markety
           @error_message = h[:fault][:detail][:service_exception][:message]
         end
       end
+
+      # Convenience shortcut to get first element of #leads (or nil if none).
+      # Appropriate for responses to Command::GetLead#get_lead_by_idnum, which cannot
+      # result in more than one lead.
+      def lead
+        @leads.first
+      end
     end
   end
 end
