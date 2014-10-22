@@ -31,7 +31,8 @@ client = Markety.new_client(USER_ID, ENCRYPTION_KEY, END_POINT)
 client = Markety.new_client(USER_ID, ENCRYPTION_KEY, END_POINT, target_workspace: "ws_name")
 
 # Get leads from the Marketo database
-leads = client.get_lead_by_email("joe@example.com").leads  #array
+lead = client.get_lead_by_idnum("123456").lead              # Lead object (or nil)
+leads = client.get_leads_by_email("joe@example.com").leads  # array of Leads
 
 # Update a lead record
 lead.set_attribute("Email", "joe-schmoe@example.com")
