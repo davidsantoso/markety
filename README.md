@@ -1,9 +1,5 @@
 # Markety
 
-This is a heavily-modified fork of [David Santoso's gem](https://github.com/davidsantoso/markety).
-
-The plan is to PR it back to him, and it'll be version 2.
-
 <!--
 [![Build Status](https://travis-ci.org/davidsantoso/markety.svg?branch=master)](https://travis-ci.org/davidsantoso/markety)
 [![Gem Version](https://badge.fury.io/rb/markety.svg)](http://badge.fury.io/rb/markety)
@@ -26,9 +22,9 @@ and run bundle install.
 
 ```ruby
 # Instantiate a new Markety client using your Marketo SOAP endpoint, User ID, and Encryption Key
-client = Markety.new_client(USER_ID, ENCRYPTION_KEY, END_POINT)
+client = Markety::Client.new(USER_ID, ENCRYPTION_KEY, END_POINT)
 # or, if using a workspace:
-client = Markety.new_client(USER_ID, ENCRYPTION_KEY, END_POINT, target_workspace: "ws_name")
+client = Markety.::Client.new(USER_ID, ENCRYPTION_KEY, END_POINT, target_workspace: "ws_name")
 
 # Get leads from the Marketo database
 lead = client.get_lead_by_idnum("123456").lead              # Lead object (or nil)
