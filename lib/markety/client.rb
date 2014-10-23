@@ -1,4 +1,14 @@
+require 'markety/command'
+require 'markety/response'
+
 module Markety
+
+  # Create the Markety client.  All requests will be sent via methods on the returned +Markety::Client+ object.
+  #
+  # Supported +options+:
+  #
+  # * +:log+ (bool) - enable/disable Savon logging (default: true)
+  # * +:target_workspace+ (string) - name of workspace to use, if any
   def self.new_client(access_key, secret_key, end_point, options = {})
     api_version = options.fetch(:api_version, '2_3')
 
@@ -11,148 +21,49 @@ module Markety
       log false if options[:log] == false
     end
 
-    Client.new(client, Markety::AuthenticationHeader.new(access_key, secret_key))
+    auth_header = Markety::AuthenticationHeader.new(access_key, secret_key)
+
+    client_options = {}
+    client_options[:target_workspace] = options[:target_workspace] if options[:target_workspace]
+
+    Client.new(client, auth_header, client_options)
   end
 
+  # All of the Markety::Command modules are mixed in to Client, so see the documentation for those modules.
   class Client
-    def initialize(savon_client, authentication_header)
+    include Markety::Command::GetLead
+    include Markety::Command::SyncLead
+    include Markety::Command::ListOperation
+
+    attr_reader :target_workspace
+
+    # Don't use this; use <tt>Markety.new_client()</tt>
+    def initialize(savon_client, authentication_header, options={})
       @client = savon_client
-      @header = authentication_header
-    end
-
-    public
-
-    def get_lead_by_idnum(idnum)
-      get_lead(LeadKey.new(LeadKeyType::IDNUM, idnum))
-    end
-
-
-    def get_lead_by_email(email)
-      get_lead(LeadKey.new(LeadKeyType::EMAIL, email))
-    end
-
-    def set_logger(logger)
-      @logger = logger
-    end
-
-    def sync_lead(email, first, last, company, mobile)
-      lead_record = LeadRecord.new(email)
-      lead_record.set_attribute('FirstName', first)
-      lead_record.set_attribute('LastName', last)
-      lead_record.set_attribute('Email', email)
-      lead_record.set_attribute('Company', company)
-      lead_record.set_attribute('MobilePhone', mobile)
-      sync_lead_record(lead_record)
-    end
-
-    def sync_lead_record(lead_record)
-      begin
-        attributes = []
-        lead_record.each_attribute_pair do |name, value|
-          attributes << {attr_name: name, attr_value: value, attr_type: lead_record.get_attribute_type(name) }
-        end
-
-        response = send_request(:sync_lead, {
-          return_lead: true,
-          lead_record: {
-            email: lead_record.email,
-            lead_attribute_list: {
-              attribute: attributes
-            }
-          }
-        })
-
-        return LeadRecord.from_hash(response[:success_sync_lead][:result][:lead_record])
-      rescue Exception => e
-        @logger.log(e) if @logger
-        return nil
-      end
-    end
-
-    def sync_lead_record_on_id(lead_record)
-      idnum = lead_record.idnum
-      raise 'lead record id not set' if idnum.nil?
-
-      begin
-        attributes = []
-        lead_record.each_attribute_pair do |name, value|
-          attributes << {attr_name: name, attr_value: value}
-        end
-
-        attributes << {attr_name: 'Id', attr_type: 'string', attr_value: idnum.to_s}
-
-        response = send_request(:sync_lead, {
-          return_lead: true,
-          lead_record:
-          {
-            lead_attribute_list: { attribute: attributes},
-            id: idnum
-          }
-        })
-        return LeadRecord.from_hash(response[:success_sync_lead][:result][:lead_record])
-      rescue Exception => e
-        @logger.log(e) if @logger
-        return nil
-      end
-    end
-
-    def add_to_list(list_name, idnum)
-      list_operation(list_name, ListOperationType::ADD_TO, idnum)
-    end
-
-    def remove_from_list(list_name, idnum)
-      list_operation(list_name, ListOperationType::REMOVE_FROM, idnum)
-    end
-
-    def is_member_of_list?(list_name, idnum)
-      response = list_operation(list_name, ListOperationType::IS_MEMBER_OF, idnum)
-      return response[:success_list_operation][:result][:status_list][:lead_status][:status]
+      @auth_header = authentication_header
+      @target_workspace = options[:target_workspace]
     end
 
     private
 
-    def list_operation(list_name, list_operation_type, idnum)
-      begin
-        response = send_request(:list_operation, {
-          list_operation: list_operation_type,
-          strict:         'false',
-          list_key: {
-            key_type: 'MKTOLISTNAME',
-            key_value: list_name
-          },
-          list_member_list: {
-            lead_key: [{
-              key_type: 'IDNUM',
-              key_value: idnum
-              }
-            ]
-          }
-        })
-        return response
-      rescue Exception => e
-        @logger.log(e) if @logger
-        return nil
+    def send_request(cmd_type, message)
+      @auth_header.set_time(DateTime.now)
+
+      header_hash = @auth_header.to_hash
+      if cmd_type==:sync_lead && @target_workspace
+        header_hash.merge!({ "ns1:MktowsContextHeader"=>{"targetWorkspace"=>@target_workspace}})
       end
-    end
 
-    def get_lead(lead_key)
       begin
-        response = send_request(:get_lead, {"leadKey" => lead_key.to_hash})
-        return LeadRecord.from_hash(response[:success_get_lead][:result][:lead_record_list][:lead_record])
-      rescue Exception => e
-        @logger.log(e) if @logger
-        return nil
+        response = request(cmd_type, message, header_hash) #returns a Savon::Response
+      rescue Savon::SOAPFault => e
+        response = e
       end
+      Markety::Response::ResponseFactory.create_response(cmd_type,response)
     end
 
-    def send_request(namespace, message)
-      @header.set_time(DateTime.now)
-      response = request(namespace, message, @header.to_hash)
-      response.to_hash
-    end
-
-    def request(namespace, message, header)
-      @client.call(namespace, message: message, soap_header: header)
+    def request(cmd_type, message, header)
+      @client.call(cmd_type, message: message, soap_header: header)
     end
   end
 end

@@ -1,0 +1,50 @@
+I, [2014-09-16T16:56:26.346615 #30338]  INFO -- : SOAP request: https://354-ESL-459.mktoapi.com/soap/mktows/2_4
+I, [2014-09-16T16:56:26.346749 #30338]  INFO -- : SOAPAction: "http://www.marketo.com/mktows/listOperation", Content-Type: text/xml;charset=UTF-8, Content-Length: 948
+D, [2014-09-16T16:56:26.347190 #30338] DEBUG -- : <?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://www.marketo.com/mktows/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.marketo.com/mktows/">
+  <SOAP-ENV:Header>
+    <ns1:AuthenticationHeader>
+      <mktowsUserId>xxx</mktowsUserId>
+      <requestSignature>xxx</requestSignature>
+      <requestTimestamp>2014-09-16T16:56:26-05:00</requestTimestamp>
+    </ns1:AuthenticationHeader>
+  </SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <tns:paramsListOperation>
+      <listOperation>REMOVEFROMLIST</listOperation>
+      <strict>false</strict>
+      <listKey>
+        <keyType>MKTOLISTNAME</keyType>
+        <keyValue>foo_list</keyValue>
+      </listKey>
+      <listMemberList>
+        <leadKey>
+          <keyType>IDNUM</keyType>
+          <keyValue>1009999</keyValue>
+        </leadKey>
+      </listMemberList>
+    </tns:paramsListOperation>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+D, [2014-09-16T16:56:26.347596 #30338] DEBUG -- : HTTPI POST request to 354-ESL-459.mktoapi.com (net_http)
+I, [2014-09-16T16:56:27.153555 #30338]  INFO -- : SOAP response (status 200)
+D, [2014-09-16T16:56:27.153877 #30338] DEBUG -- : <?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.marketo.com/mktows/">
+  <SOAP-ENV:Body>
+    <ns1:successListOperation>
+      <result>
+        <success>false</success>
+        <statusList>
+          <leadStatus>
+            <leadKey>
+              <keyType>IDNUM</keyType>
+              <keyValue>1009999</keyValue>
+            </leadKey>
+            <status>false</status>
+          </leadStatus>
+        </statusList>
+      </result>
+    </ns1:successListOperation>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

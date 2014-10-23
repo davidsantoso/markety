@@ -1,0 +1,42 @@
+REQUEST:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="h
+  <SOAP-ENV:Header>
+    <ns1:AuthenticationHeader>
+      <mktowsUserId>xxx</mktowsUserId>
+      <requestSignature>xxx</requestSignature>
+      <requestTimestamp>2014-07-25T14:22:07-05:00</requestTimestamp>
+    </ns1:AuthenticationHeader>
+  </SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <tns:paramsGetLead>
+      <leadKey>
+        <keyType>EMAIL</keyType>
+        <keyValue>pants@example.com</keyValue>
+      </leadKey>
+    </tns:paramsGetLead>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+
+
+RESPONSE:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP-ENV:Body>
+    <SOAP-ENV:Fault>
+      <faultcode>SOAP-ENV:Client</faultcode>
+      <faultstring>20103 - Lead not found</faultstring>
+      <detail>
+        <ns1:serviceException xmlns:ns1="http://www.marketo.com/mktows/">
+          <name>mktServiceException</name>
+          <message>No lead found with EMAIL = pants@example.com (20103)</message>
+          <code>20103</code>
+        </ns1:serviceException>
+      </detail>
+    </SOAP-ENV:Fault>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
