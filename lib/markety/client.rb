@@ -2,33 +2,6 @@ require 'markety/command'
 require 'markety/response'
 
 module Markety
-
-  # Create the Markety client.  All requests will be sent via methods on the returned +Markety::Client+ object.
-  #
-  # Supported +options+:
-  #
-  # * +:log+ (bool) - enable/disable Savon logging (default: true)
-  # * +:target_workspace+ (string) - name of workspace to use, if any
-  def self.new_client(access_key, secret_key, end_point, options = {})
-    api_version = options.fetch(:api_version, '2_3')
-
-    client = Savon.client do
-      endpoint end_point
-      wsdl "http://app.marketo.com/soap/mktows/#{api_version}?WSDL"
-      env_namespace "SOAP-ENV"
-      namespaces({"xmlns:ns1" => "http://www.marketo.com/mktows/"})
-      pretty_print_xml true
-      log false if options[:log] == false
-    end
-
-    auth_header = Markety::AuthenticationHeader.new(access_key, secret_key)
-
-    client_options = {}
-    client_options[:target_workspace] = options[:target_workspace] if options[:target_workspace]
-
-    Client.new(client, auth_header, client_options)
-  end
-
   # All of the Markety::Command modules are mixed in to Client, so see the documentation for those modules.
   class Client
     include Markety::Command::GetLead
@@ -37,11 +10,21 @@ module Markety
 
     attr_reader :target_workspace
 
-    # Don't use this; use <tt>Markety.new_client()</tt>
-    def initialize(savon_client, authentication_header, options={})
-      @client = savon_client
-      @auth_header = authentication_header
-      @target_workspace = options[:target_workspace]
+    def initialize(access_key, secret_key, end_point, options = {})
+      api_version = options.fetch(:api_version, '2_3')
+
+      @client = Savon.client do
+        endpoint end_point
+        wsdl "http://app.marketo.com/soap/mktows/#{api_version}?WSDL"
+        namespaces({"xmlns:ns1" => "http://www.marketo.com/mktows/"})
+        env_namespace "SOAP-ENV"
+        pretty_print_xml true
+        log false if options[:log] == false
+      end
+
+      @auth_header = Markety::AuthenticationHeader.new(access_key, secret_key)
+      @client_options = {}
+      @client_options[:target_workspace] = options.has_key?(:target_workspace) ? options[:target_workspace] : {}
     end
 
     private
