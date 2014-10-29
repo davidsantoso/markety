@@ -39,3 +39,6 @@ Gemfile.lock
 *.o
 *.a
 mkmf.log
+
+# vim
+*.swp
