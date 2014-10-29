@@ -40,7 +40,7 @@ leads = client.get_leads_by_email("joe@example.com").leads  # array of Leads
 
 After getting your leads, you can update their attributes before syncing.
 ```ruby
-# Update a lead record
+# Update a leads email address
 lead.set_attribute("Email", "joe-schmoe@example.com")
 
 # Update a lead record with an attribute that isn't a string
