@@ -65,7 +65,7 @@ client.add_to_list('The_List_Name', lead.idnum).list_operation_status #true if s
 client.remove_from_list('The_List_Name', lead.idnum).list_operation_status #true if successful removal
 ```
 
-Lastly, if you would like to create a lead in Marketo via markety, you can use the sync lead method the same way you would use the syncy lead to update a lead. Just start by instantiating a Markety::Lead.
+Lastly, if you would like to create a lead in Marketo, you can use the sync lead method the same way you would use the sync lead to update a lead. Just start by instantiating a Markety::Lead.
 ```ruby
 new_lead = Markety::Lead.new
 new_lead.set_attribute("Email", "doge@suchemail.com")
