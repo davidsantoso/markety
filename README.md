@@ -38,7 +38,7 @@ lead = client.get_lead_by_idnum("123456").lead              # Lead object (or ni
 leads = client.get_leads_by_email("joe@example.com").leads  # array of Leads
 ```
 
-AFter getting your leads, you can update their attributes before syncing.
+After getting your leads, you can update their attributes before syncing.
 ```ruby
 # Update a lead record
 lead.set_attribute("Email", "joe-schmoe@example.com")
