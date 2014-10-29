@@ -26,13 +26,11 @@ client = Markety::Client.new(USER_ID, ENCRYPTION_KEY, END_POINT)
 client = Markety.::Client.new(USER_ID, ENCRYPTION_KEY, END_POINT, target_workspace: "ws_name")
 ```
 
-You can get leads from Marketo by idnum or by email. Markety returns a ``GetLeadResponse`` object
-which is an array of leads. Getting a lead by idnum will return a single lead, however because
-Marketo allows for an email address to be tied to more than one lead getting by email could
-potentially result in an array of leads with the same email address.
+You can get leads from Marketo by idnum or by email. Markety returns a ``GetLeadResponse`` object which is an array of leads. Because Marketo allows for an email address to be tied to more than one lead, getting by email could
+potentially result in an array of leads with the same email address so you can call ``.leads`` to get all the leads in the array. Getting a lead by idnum will return a single lead, however because ``GetLeadResponse`` is an array of leads, you'll need to add ``.lead`` to get the lead from the response.
 ```ruby
 # By idnum
-lead = client.get_lead_by_idnum("123456").lead              # Lead object (or nil)
+lead = client.get_lead_by_idnum("123456").lead  # Single lead object (or nil)
 
 # By email
 leads = client.get_leads_by_email("joe@example.com").leads  # array of Leads
@@ -47,8 +45,7 @@ lead.set_attribute("Email", "joe-schmoe@example.com")
 lead.set_attribute("Activated", true, "Boolean") # [1] see below
 ```
 
-Once you're ready to sync back, just tell Markety how you'd like it to sync. There are currently
-3 supported methods, "EMAIL", "MARKETO_ID" and "FOREIGN_ID"
+Once you're ready to sync back, just tell Markety how you'd like it to sync. There are currently 3 supported methods, "EMAIL", "MARKETO_ID" and "FOREIGN_ID"
 ```
 # Sync the lead with Marketo
 response = client.sync_lead_record(lead, "EMAIL")
@@ -68,8 +65,7 @@ client.add_to_list('The_List_Name', lead.idnum).list_operation_status #true if s
 client.remove_from_list('The_List_Name', lead.idnum).list_operation_status #true if successful removal
 ```
 
-Lastly, if you would like to create a lead in Marketo via markety, you can use the sync lead method the
-same way you would use the syncy lead to update a lead. Just start by instantiating a Markety::Lead.
+Lastly, if you would like to create a lead in Marketo via markety, you can use the sync lead method the same way you would use the syncy lead to update a lead. Just start by instantiating a Markety::Lead.
 ```ruby
 new_lead = Markety::Lead.new
 new_lead.set_attribute("Email", "doge@suchemail.com")
@@ -90,8 +86,7 @@ client = Markety.new_client(USER_ID, ENCRYPTION_KEY, END_POINT, { log: false })
 
 ## Contributing
 
-PRs are very welcome! Feel free to send a PR for any endpoint you might need. Unfortunately Markety
-development has slowed a bit in the last few months.
+PRs are very welcome! Feel free to send a PR for any endpoint you might need.
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
