@@ -23,7 +23,7 @@ Instantiate a new Markety client using your Marketo SOAP endpoint, User ID, and 
 ```ruby
 client = Markety::Client.new(USER_ID, ENCRYPTION_KEY, END_POINT)
 # or, if using a workspace:
-client = Markety.::Client.new(USER_ID, ENCRYPTION_KEY, END_POINT, target_workspace: "ws_name")
+client = Markety::Client.new(USER_ID, ENCRYPTION_KEY, END_POINT, target_workspace: "ws_name")
 ```
 
 You can get leads from Marketo by idnum or by email. Markety returns a ``GetLeadResponse`` object which contains an array of leads. Because Marketo allows for an email address to be tied to more than one lead, getting by email could
