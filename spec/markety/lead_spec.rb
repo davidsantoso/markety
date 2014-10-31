@@ -5,7 +5,6 @@ module Markety
   IDNUM    = 93480938
   
   
-
   describe Lead do
     it "should store the idnum" do
       lead_record = Lead.new(email:EMAIL, idnum:IDNUM)
@@ -25,7 +24,13 @@ module Markety
       lead_record2.set_attribute('favourite color', 'red')
       lead_record2.set_attribute('age', '100')
 
-      lead_record1.should == lead_record2
+      (lead_record1==lead_record2).should be true
+
+      lead_record2.set_attribute('age', '200')
+      (lead_record1==lead_record2).should be false
+
+      # issue 21
+      (lead_record1==123).should be false
     end
 
     it "should store when attributes are set" do
@@ -99,5 +104,6 @@ module Markety
 
       actual.should == expected
     end
+
   end
 end
