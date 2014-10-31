@@ -81,7 +81,7 @@ _(Admin » Field Management » New Custom Field)_
 
 ```ruby
 # Turn of Savon logging - logging is helpful during development, but outputs a lot of text which you may not want in production
-client = Markety.new_client(USER_ID, ENCRYPTION_KEY, END_POINT, { log: false })
+client = Markety::Client.new(USER_ID, ENCRYPTION_KEY, END_POINT, { log: false })
 ```
 
 ## Contributing
