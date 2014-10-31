@@ -15,6 +15,9 @@ module Markety
         get_lead(LeadKey.new(LeadKeyType::EMAIL, email))
       end
 
+      def get_lead_by_cookie(cookie)
+        get_lead(LeadKey.new(LeadKeyType::COOKIE, cookie))
+      end
 
     private
 

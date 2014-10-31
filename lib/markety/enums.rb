@@ -4,8 +4,8 @@ module Markety
   module LeadKeyType
     IDNUM           = "IDNUM"
     EMAIL           = "EMAIL"
+    COOKIE          = "COOKIE"
 
-#    COOKIE          = "COOKIE"
 #    LEADOWNEREMAIL  = "LEADOWNEREMAIL"
 #    SFDCACCOUNTID   = "SFDCACCOUNTID"
 #    SFDCCONTACTID   = "SFDCCONTACTID"
