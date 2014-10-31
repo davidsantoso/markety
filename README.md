@@ -15,7 +15,7 @@ Add this your Gemfile:
 gem 'markety'
 ```
 
-and run bundle install.
+and run `bundle install`.
 
 ##  Getting Started
 
@@ -26,7 +26,7 @@ client = Markety::Client.new(USER_ID, ENCRYPTION_KEY, END_POINT)
 client = Markety.::Client.new(USER_ID, ENCRYPTION_KEY, END_POINT, target_workspace: "ws_name")
 ```
 
-You can get leads from Marketo by idnum or by email. Markety returns a ``GetLeadResponse`` object which is an array of leads. Because Marketo allows for an email address to be tied to more than one lead, getting by email could
+You can get leads from Marketo by idnum or by email. Markety returns a ``GetLeadResponse`` object which contains an array of leads. Because Marketo allows for an email address to be tied to more than one lead, getting by email could
 potentially result in an array of leads with the same email address so you can call ``.leads`` to get all the leads in the array. Getting a lead by idnum will return a single lead, however because ``GetLeadResponse`` is an array of leads, you'll need to add ``.lead`` to get the lead from the response.
 ```ruby
 # By idnum
@@ -103,4 +103,4 @@ PRs are very welcome! Feel free to send a PR for any endpoint you might need.
 Marketo released a lead REST API on June 20, 2014 so be sure to check developers.marketo.com for another lead management integration possibility.
 
 ## Authors
-David Santoso and Grant Birchmeier.
+David Santoso and [Grant Birchmeier](https://github.com/gbirchmeier).
