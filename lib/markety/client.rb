@@ -10,6 +10,10 @@ module Markety
 
     attr_reader :target_workspace
 
+    # Supported +options+:
+    #
+    # * +:log+ (bool) - enable/disable Savon logging (default: true)
+    # * +:target_workspace+ (string) - name of workspace to use, if any
     def initialize(access_key, secret_key, end_point, options = {})
       api_version = options.fetch(:api_version, '2_3')
 
