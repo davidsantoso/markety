@@ -23,7 +23,7 @@ Instantiate a new Markety client using your Marketo SOAP endpoint, User ID, and 
 ```ruby
 client = Markety::Client.new(USER_ID, ENCRYPTION_KEY, END_POINT)
 # or, if using a workspace:
-client = Markety.::Client.new(USER_ID, ENCRYPTION_KEY, END_POINT, target_workspace: "ws_name")
+client = Markety::Client.new(USER_ID, ENCRYPTION_KEY, END_POINT, target_workspace: "ws_name")
 ```
 
 You can get leads from Marketo by idnum or by email. Markety returns a ``GetLeadResponse``
@@ -86,9 +86,9 @@ _(Admin » Field Management » New Custom Field)_
 ##  Options
 
 ```ruby
-# Turn of Savon logging - logging is helpful during development,
+# Turn off Savon logging - logging is helpful during development,
 # but outputs a lot of text which you may not want in production
-client = Markety.new_client(USER_ID, ENCRYPTION_KEY, END_POINT, { log: false })
+client = Markety::Client.new(USER_ID, ENCRYPTION_KEY, END_POINT, { log: false })
 ```
 
 ## Contributing
