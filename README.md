@@ -101,6 +101,14 @@ PRs are very welcome! Feel free to send a PR for any endpoint you might need.
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
+###Dev hint:
+
+In `irb`, from this repo's root dir, this will load the Markety classes:
+
+    > $LOAD_PATH.unshift "./lib"
+    > require 'markety'
+
+
 ## To Do's
 1. More tests.
 2. Add campaign endpoints.
