@@ -13,6 +13,7 @@ module Markety
     end
 
     def ==(other)
+      other.is_a?(Lead) &&
       @attributes==other.send(:attributes) &&
       @idnum==other.idnum &&
       @email==other.email &&
