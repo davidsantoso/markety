@@ -5,7 +5,7 @@ module Markety
     it "should define the correct types" do
       LeadKeyType::IDNUM.should == 'IDNUM'
       LeadKeyType::EMAIL.should == 'EMAIL'
-      #LeadKeyType::COOKIE.should == 'COOKIE'
+      LeadKeyType::COOKIE.should == 'COOKIE'
       #LeadKeyType::LEADOWNEREMAIL.should == 'LEADOWNEREMAIL'
       #LeadKeyType::SFDCACCOUNTID.should == 'SFDCACCOUNTID'
       #LeadKeyType::SFDCCONTACTID.should == 'SFDCCONTACTID'

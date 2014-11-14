@@ -1,6 +1,3 @@
-require 'coveralls'
-Coveralls.wear!
-
 require 'support/savon_helper'
 
 require 'pry'
