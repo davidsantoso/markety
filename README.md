@@ -53,7 +53,7 @@ Once you're ready to sync back, just tell Markety how you'd like it to sync.
 There are currently 3 supported methods, "EMAIL", "MARKETO_ID" and "FOREIGN_ID"
 ```
 # Sync the lead with Marketo
-response = client.sync_lead_record(lead, "EMAIL")
+response = client.sync_lead(lead, "EMAIL")
 ```
 
 There are a few available list operations available at the moment. Be sure to pass in the lead
