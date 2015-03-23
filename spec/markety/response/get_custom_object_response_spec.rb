@@ -7,8 +7,6 @@ module Markety
       context "when there is one custom object found" do
 
         let (:savon_resp) {SavonHelper.create_response(File.read(File.expand_path("../../../fixtures/custom_objects/get_custom_objects/one_custom_object_found.xml", __FILE__)))}
-        let(:custom_object) {double("custom_object")}
-
 
         describe "#success" do
           it "returns true" do
@@ -71,7 +69,6 @@ module Markety
           expect(response.custom_objects).to be_empty
         end
       end
-
 
     end
   end
