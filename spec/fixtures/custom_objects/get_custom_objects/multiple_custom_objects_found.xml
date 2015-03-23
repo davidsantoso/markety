@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns1="http://www.marketo.com/mktows/">
+  <SOAP-ENV:Body>
+    <ns1:successGetCustomObjects>
+      <result>
+        <objTypeName>Roadshow</objTypeName>
+        <returnCount>6</returnCount>
+        <remainingCount>0</remainingCount>
+        <newStreamPosition>{"ky":["1090177"],"os":6}</newStreamPosition>
+        <customObjList>
+          <customObj>
+            <customObjKeyList>
+              <attribute>
+                <attrName>MKTOID</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>1090177</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>rid</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>123456</attrValue>
+              </attribute>
+            </customObjKeyList>
+            <customObjAttributeList>
+              <attribute>
+                <attrName>city</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>city4</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>state</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>state4</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>zip</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>zip4</attrValue>
+              </attribute>
+            </customObjAttributeList>
+          </customObj>
+          <customObj>
+            <customObjKeyList>
+              <attribute>
+                <attrName>MKTOID</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>1090177</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>rid</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>rid0</attrValue>
+              </attribute>
+            </customObjKeyList>
+            <customObjAttributeList>
+              <attribute>
+                <attrName>city</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>city0</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>state</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>state0</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>zip</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>zip0</attrValue>
+              </attribute>
+            </customObjAttributeList>
+          </customObj>
+          <customObj>
+            <customObjKeyList>
+              <attribute>
+                <attrName>MKTOID</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>1090177</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>rid</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>rid1</attrValue>
+              </attribute>
+            </customObjKeyList>
+            <customObjAttributeList>
+              <attribute>
+                <attrName>city</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>SanMateo</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>state</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>California</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>zip</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>94404</attrValue>
+              </attribute>
+            </customObjAttributeList>
+          </customObj>
+          <customObj>
+            <customObjKeyList>
+              <attribute>
+                <attrName>MKTOID</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>1090177</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>rid</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>rid2</attrValue>
+              </attribute>
+            </customObjKeyList>
+            <customObjAttributeList>
+              <attribute>
+                <attrName>city</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>city2</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>state</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>state2</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>zip</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>zip2</attrValue>
+              </attribute>
+            </customObjAttributeList>
+          </customObj>
+          <customObj>
+            <customObjKeyList>
+              <attribute>
+                <attrName>MKTOID</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>1090177</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>rid</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>rid3</attrValue>
+              </attribute>
+            </customObjKeyList>
+            <customObjAttributeList>
+              <attribute>
+                <attrName>city</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>city3</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>state</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>state3</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>zip</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>zip3</attrValue>
+              </attribute>
+            </customObjAttributeList>
+          </customObj>
+          <customObj>
+            <customObjKeyList>
+              <attribute>
+                <attrName>MKTOID</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>1090177</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>rid</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>rid4</attrValue>
+              </attribute>
+            </customObjKeyList>
+            <customObjAttributeList>
+              <attribute>
+                <attrName>city</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>city4</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>state</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>state4</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>zip</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>zip4</attrValue>
+              </attribute>
+            </customObjAttributeList>
+          </customObj>
+        </customObjList>
+      </result>
+    </ns1:successGetCustomObjects>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

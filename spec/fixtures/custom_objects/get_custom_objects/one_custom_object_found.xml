@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns1="http://www.marketo.com/mktows/">
+  <SOAP-ENV:Body>
+    <ns1:successGetCustomObjects>
+      <result>
+        <objTypeName>Roadshow</objTypeName>
+        <returnCount>6</returnCount>
+        <remainingCount>0</remainingCount>
+        <newStreamPosition>{"ky":["1090177"],"os":6}</newStreamPosition>
+        <customObjList>
+          <customObj>
+            <customObjKeyList>
+              <attribute>
+                <attrName>MKTOID</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>1090177</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>rid</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>123456</attrValue>
+              </attribute>
+            </customObjKeyList>
+            <customObjAttributeList>
+              <attribute>
+                <attrName>city</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>city4</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>state</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>state4</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>zip</attrName>
+                <attrType xsi:nil="true" />
+                <attrValue>zip4</attrValue>
+              </attribute>
+            </customObjAttributeList>
+          </customObj>
+        </customObjList>
+      </result>
+    </ns1:successGetCustomObjects>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
