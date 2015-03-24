@@ -88,16 +88,16 @@ You can also create and fetch Marketo custom object instances. Marketo custom ob
 have a one-to-many relationship between your marketo leads and the custom object. You will need to
 have custom objects set up in your account before you can create or get them.
 
-Each custom object has their own unique key and foreign key which can be used as identifiers.
-You can find all the custom objects that belong to a particular lead, or find a custom object
-with a specific id.
-```
+Each custom object has its own unique key and foreign key which can be used as identifiers to fetch
+the object. You can find all the custom objects that belong to a particular lead and/or find a custom
+object with a specific id.
+```ruby
 # getting a custom object
 custom_object = client.get_custom_object_by_keys("Roadshow", {"MKTOID" => 1090177, "rid" => 123456})
 ```
 
 You can create your own custom object easily by specifying the object type name, keys and attributes
-```
+```ruby
 # creating a custom object
 custom_object = Markety::CustomObject.new(
     object_type_name: "Roadshow",
@@ -107,7 +107,7 @@ custom_object = Markety::CustomObject.new(
 
 Once you've created your custom object, you can sync it up and specify either the "INSERT", "UPDATE"
 or "UPSERT" operations (the default is "UPSERT" if no operation is specified).
-```
+```ruby
 # syncing a custom object
 response = client.sync_custom_object(custom_object, "UPSERT")
 ```
