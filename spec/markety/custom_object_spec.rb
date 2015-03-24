@@ -5,22 +5,22 @@ module Markety
 
     describe '#object_type_name' do
       it "returns the name of the type of custom object" do
-        custom_object = CustomObject.new(object_type_name: "Job")
-        expect(custom_object.object_type_name).to eq "Job"
+        custom_object = CustomObject.new(object_type_name: "Roadshow")
+        expect(custom_object.object_type_name).to eq "Roadshow"
       end
     end
 
     describe '#get_key' do
       it "gets the key" do
-        custom_object = CustomObject.new(object_type_name: "Job", keys: {"leadId" => 123})
-        expect(custom_object.get_key("leadId")).to eq 123
+        custom_object = CustomObject.new(object_type_name: "Roadshow", keys: {"MKTOID" => 123})
+        expect(custom_object.get_key("MKTOID")).to eq 123
       end
     end
 
     describe '#keys' do
       it "returns all the keys" do
-        custom_object = CustomObject.new(object_type_name: "Job", keys: {"leadId" => 123, "jobId" => 345})
-        expect(custom_object.keys).to eq({"leadId" => 123, "jobId" => 345})
+        custom_object = CustomObject.new(object_type_name: "Roadshow", keys: {"MKTOID" => 123, "rid" => 345})
+        expect(custom_object.keys).to eq({"MKTOID" => 123, "rid" => 345})
       end
     end
 
@@ -34,21 +34,21 @@ module Markety
     describe "#to_sync_custom_object_hash" do
       it "returns a hash formatted for the sync_custom_object" do
         custom_object = CustomObject.new(
-          object_type_name: "Job",
-          keys: {"leadId" => 123, "jobId" => 345},
-          attributes: {"name" => "Some Job", "anotherAttribute" => "Bananas"})
+          object_type_name: "Roadshow",
+          keys: {"MKTOID" => 123, "rid" => 345},
+          attributes: {"name" => "Some Roadshow", "anotherAttribute" => "Bananas"})
 
         expect(custom_object.to_sync_custom_object_hash).to eq({
           "customObj" => {
             "customObjKeyList" => {
               "attribute" => [
-                {"attrName" => "leadId", "attrValue" => 123},
-                {"attrName" => "jobId", "attrValue" => 345}
+                {"attrName" => "MKTOID", "attrValue" => 123},
+                {"attrName" => "rid", "attrValue" => 345}
               ]
             },
             "customObjAttributeList" => {
               "attribute" => [
-                {"attrName" => "name", "attrValue" => "Some Job"},
+                {"attrName" => "name", "attrValue" => "Some Roadshow"},
                 {"attrName" => "anotherAttribute", "attrValue" => "Bananas"},
               ]
             }

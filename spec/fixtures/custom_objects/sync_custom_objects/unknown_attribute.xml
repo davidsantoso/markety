@@ -5,15 +5,15 @@
       <result>
         <syncCustomObjStatusList>
           <syncCustomObjStatus>
-            <objTypeName>job</objTypeName>
+            <objTypeName>roadshow</objTypeName>
             <customObjKeyList>
               <attribute>
-                <attrName>job_lead_id</attrName>
+                <attrName>MKTOID</attrName>
                 <attrType xsi:nil="true"/>
                 <attrValue>542065</attrValue>
               </attribute>
               <attribute>
-                <attrName>jobId</attrName>
+                <attrName>rid</attrName>
                 <attrType xsi:nil="true"/>
                 <attrValue>345</attrValue>
               </attribute>

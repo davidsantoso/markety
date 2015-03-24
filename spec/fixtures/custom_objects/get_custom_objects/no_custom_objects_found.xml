@@ -3,7 +3,7 @@
   <SOAP-ENV:Body>
     <ns1:successGetCustomObjects>
       <result>
-        <objTypeName>job</objTypeName>
+        <objTypeName>roadshow</objTypeName>
         <returnCount>0</returnCount>
         <remainingCount>0</remainingCount>
         <newStreamPosition>{"ky":["123"],"os":0}</newStreamPosition>
