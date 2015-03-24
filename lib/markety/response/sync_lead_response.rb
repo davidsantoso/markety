@@ -5,7 +5,7 @@ module Markety
   module Response
     # Response class for SyncLead commands
     class SyncLeadResponse < GenericResponse
-      
+
       # +:created+ or +:updated+ (or nil if unsuccessful)
       attr_reader :update_type
       # the updated or created Lead (or nil if unsuccessful)

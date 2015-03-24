@@ -8,7 +8,7 @@ module Markety
       end
 
       def convert_keys(keys)
-        keys.collect do |key, value|
+        keys.map do |key, value|
           {"attrName" => key, "attrValue" => value}
         end
       end

@@ -27,7 +27,7 @@ module Markety
       keys = {}
       attributes = {}
       marketo_hash[:custom_obj_key_list][:attribute].each{|attribute| keys[attribute[:attr_name]] = attribute[:attr_value]}
-      marketo_hash[:custom_obj_attribute_list][:attribute].each{|attribute| attributes[attribute[:attr_name]] = attribute[:attr_value]}
+      marketo_hash[:custom_obj_attribute_list][:attribute].each{|attribute| attributes[attribute[:attr_name]] = attribute[:attr_value]} if marketo_hash[:custom_obj_attribute_list]
       new(object_type_name: object_type_name, keys: keys, attributes: attributes)
     end
 
