@@ -70,7 +70,7 @@ client.add_to_list('The_List_Name', lead.idnum).list_operation_status #true if s
 client.remove_from_list('The_List_Name', lead.idnum).list_operation_status #true if successful removal
 ```
 
-Lastly, if you would like to create a lead in Marketo, you can use the sync lead method the same way
+If you would like to create a lead in Marketo, you can use the sync lead method the same way
 you would use the sync lead to update a lead. Just start by instantiating a Markety::Lead.
 ```ruby
 new_lead = Markety::Lead.new
@@ -82,6 +82,37 @@ Be sure you have the correct attribute fields. You can find those in your Market
 
 [1] Note that [the Marketo API does not let you create custom fields] (https://community.marketo.com/MarketoDiscussionDetail?id=90650000000PpyEAAS#j_id0:j_id2:j_id9:j_id10:apexideas:j_id248) at this time. In order to set a custom attribute through the API, it must first be added from the Admin interface.
 _(Admin » Field Management » New Custom Field)_
+
+### Custom Objects
+You can also create and fetch Marketo custom object instances. Marketo custom objects allow you to
+have a one-to-many relationship between your marketo leads and the custom object. You will need to
+have custom objects set up in your account before you can create or get them.
+
+Each custom object has its own unique key and foreign key which can be used as identifiers to fetch
+the object. You can find all the custom objects that belong to a particular lead and/or find a custom
+object with a specific id.
+```ruby
+# getting a custom object
+custom_object = client.get_custom_object_by_keys("Roadshow", {"MKTOID" => 1090177, "rid" => 123456})
+```
+
+You can create your own custom object easily by specifying the object type name, keys and attributes
+```ruby
+# creating a custom object
+custom_object = Markety::CustomObject.new(
+    object_type_name: "Roadshow",
+    keys: {"MKTOID" => 1090177, "rid" => "rid1"},
+    attributes: {"city" => "SanMateo", "zip" => 94404 })
+```
+
+Once you've created your custom object, you can sync it up and specify either the "INSERT", "UPDATE"
+or "UPSERT" operations (the default is "UPSERT" if no operation is specified).
+```ruby
+# syncing a custom object
+response = client.sync_custom_object(custom_object, "UPSERT")
+```
+
+For more information about custom objects, check out http://developers.marketo.com/documentation/soap/custom-object-operations/
 
 ##  Options
 

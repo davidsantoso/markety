@@ -17,6 +17,10 @@ module Markety
             SyncLeadResponse.new(savon_response)
           when :list_operation
             ListOperationResponse.new(savon_response)
+          when :get_custom_objects
+            GetCustomObjectResponse.new(savon_response)
+          when :sync_custom_objects
+            SyncCustomObjectResponse.new(savon_response)
           else
             GenericResponse.new(cmd_type,savon_response)
         end
