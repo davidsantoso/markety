@@ -28,6 +28,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency  'rspec-nc'
   s.add_development_dependency  'pry'
 
-  s.add_runtime_dependency      'savon', '= 2.3.1'
-  s.add_runtime_dependency      'wasabi', '= 3.2.1'
+  s.add_runtime_dependency      'savon', '~> 2.3'
+  s.add_runtime_dependency      'wasabi', '~> 3.2'
 end
