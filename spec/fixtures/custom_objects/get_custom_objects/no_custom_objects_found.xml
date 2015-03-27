@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.marketo.com/mktows/">
+  <SOAP-ENV:Body>
+    <ns1:successGetCustomObjects>
+      <result>
+        <objTypeName>roadshow</objTypeName>
+        <returnCount>0</returnCount>
+        <remainingCount>0</remainingCount>
+        <newStreamPosition>{"ky":["123"],"os":0}</newStreamPosition>
+        <customObjList/>
+      </result>
+    </ns1:successGetCustomObjects>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

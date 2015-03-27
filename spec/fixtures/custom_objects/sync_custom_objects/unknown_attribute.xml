@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns1="http://www.marketo.com/mktows/">
+  <SOAP-ENV:Body>
+    <ns1:successSyncCustomObjects>
+      <result>
+        <syncCustomObjStatusList>
+          <syncCustomObjStatus>
+            <objTypeName>roadshow</objTypeName>
+            <customObjKeyList>
+              <attribute>
+                <attrName>MKTOID</attrName>
+                <attrType xsi:nil="true"/>
+                <attrValue>542065</attrValue>
+              </attribute>
+              <attribute>
+                <attrName>rid</attrName>
+                <attrType xsi:nil="true"/>
+                <attrValue>345</attrValue>
+              </attribute>
+            </customObjKeyList>
+            <status>FAILED</status>
+            <error>Unknown name attribute list: nameasdf</error>
+          </syncCustomObjStatus>
+        </syncCustomObjStatusList>
+      </result>
+    </ns1:successSyncCustomObjects>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

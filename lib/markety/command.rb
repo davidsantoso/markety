@@ -1,5 +1,7 @@
 require 'markety/command/get_lead'
 require 'markety/command/sync_lead'
+require 'markety/command/get_custom_object'
+require 'markety/command/sync_custom_object'
 require 'markety/command/list_operation'
 
 module Markety
