@@ -14,7 +14,6 @@ module Markety
 
       def custom_objects
         return [] unless success?
-        puts custom_obj_hash
         @custom_objects ||= begin
           custom_obj_hash.map do |single_custom_obj_hash|
             CustomObject.from_marketo_hash(object_type_name, single_custom_obj_hash)
