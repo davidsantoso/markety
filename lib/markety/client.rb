@@ -6,6 +6,7 @@ module Markety
   class Client
     include Markety::Command::GetLead
     include Markety::Command::SyncLead
+    include Markety::Command::SyncMultipleLeads
     include Markety::Command::GetCustomObject
     include Markety::Command::SyncCustomObject
     include Markety::Command::ListOperation

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns1="http://www.marketo.com/mktows/">
+  <SOAP-ENV:Body>
+    <ns1:successSyncMultipleLeads>
+      <result>
+        <syncStatusList>
+          <syncStatus>
+            <leadId>1090240</leadId>
+            <status>UPDATED</status>
+            <error xsi:nil="true" />
+          </syncStatus>
+        </syncStatusList>
+      </result>
+    </ns1:successSyncMultipleLeads>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
