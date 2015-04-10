@@ -39,19 +39,17 @@ module Markety
           attributes: {"name" => "Some Roadshow", "anotherAttribute" => "Bananas"})
 
         expect(custom_object.to_sync_custom_object_hash).to eq({
-          "customObj" => {
-            "customObjKeyList" => {
-              "attribute" => [
-                {"attrName" => "MKTOID", "attrValue" => 123},
-                {"attrName" => "rid", "attrValue" => 345}
-              ]
-            },
-            "customObjAttributeList" => {
-              "attribute" => [
-                {"attrName" => "name", "attrValue" => "Some Roadshow"},
-                {"attrName" => "anotherAttribute", "attrValue" => "Bananas"},
-              ]
-            }
+          "customObjKeyList" => {
+            "attribute" => [
+              {"attrName" => "MKTOID", "attrValue" => 123},
+              {"attrName" => "rid", "attrValue" => 345}
+            ]
+          },
+          "customObjAttributeList" => {
+            "attribute" => [
+              {"attrName" => "name", "attrValue" => "Some Roadshow"},
+              {"attrName" => "anotherAttribute", "attrValue" => "Bananas"},
+            ]
           }
         })
       end

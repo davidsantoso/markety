@@ -15,11 +15,8 @@ module Markety
 
     def to_sync_custom_object_hash
       {
-        "customObj" =>
-        {
-          "customObjKeyList" => key_list,
-          "customObjAttributeList" => attribute_list
-        }
+        "customObjKeyList" => key_list,
+        "customObjAttributeList" => attribute_list
       }
     end
 

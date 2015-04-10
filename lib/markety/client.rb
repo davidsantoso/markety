@@ -25,7 +25,7 @@ module Markety
         namespaces({"xmlns:ns1" => "http://www.marketo.com/mktows/"})
         env_namespace "SOAP-ENV"
         pretty_print_xml true
-        log false if options[:log] == false
+        log options.fetch(:log, false)
       end
 
       @auth_header = Markety::AuthenticationHeader.new(access_key, secret_key)
