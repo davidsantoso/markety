@@ -23,19 +23,19 @@ module Markety
     # hydrates an instance from a savon hash returned from the marketo API
     def self.from_hash(savon_hash)
       lead = Lead.new(email: savon_hash[:email], idnum:savon_hash[:id].to_i)
-      
+
       unless savon_hash[:lead_attribute_list].nil?
         if savon_hash[:lead_attribute_list][:attribute].kind_of? Hash
           attributes = [savon_hash[:lead_attribute_list][:attribute]]
         else
           attributes = savon_hash[:lead_attribute_list][:attribute]
         end
-        
+
         attributes.each do |attribute|
           lead.set_attribute(attribute[:attr_name], attribute[:attr_value], attribute[:attr_type])
         end
       end
-      
+
       lead
     end
 
@@ -56,9 +56,21 @@ module Markety
       @types[name]
     end
 
+    def synchronisation_hash
+      keys_hash.merge({"leadAttributeList" => {"attribute" => attributes_soap_array}})
+    end
 
   private
-    def attributes_soap_array()
+
+    def keys_hash
+      keys_hash = {}
+      keys_hash.merge!({"id" => idnum}) unless idnum.nil?
+      keys_hash.merge!({"foreignSysPersonId" => foreign_sys_person_id}) unless foreign_sys_person_id.nil?
+      keys_hash.merge!({"Email" => email}) unless email.nil?
+      keys_hash
+    end
+
+    def attributes_soap_array
       arr = []
       @attributes.each_pair do |name,value|
         arr << {attr_name: name, attr_type: self.get_attribute_type(name), attr_value: value }
