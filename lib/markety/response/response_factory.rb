@@ -1,6 +1,7 @@
 require 'markety/response/generic_response'
 require 'markety/response/get_lead_response'
 require 'markety/response/sync_lead_response'
+require 'markety/response/sync_multiple_leads_response'
 require 'markety/response/list_operation_response'
 
 module Markety
@@ -15,6 +16,8 @@ module Markety
             GetLeadResponse.new(savon_response)
           when :sync_lead
             SyncLeadResponse.new(savon_response)
+          when :sync_multiple_leads
+            SyncMultipleLeadsResponse.new(savon_response)
           when :list_operation
             ListOperationResponse.new(savon_response)
           when :get_custom_objects
