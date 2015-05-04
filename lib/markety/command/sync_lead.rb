@@ -12,10 +12,10 @@ module Markety
       end
 
     private
-  
+
       def create_sync_lead_request_hash(lead, sync_method)
         raise "missing sync method" unless sync_method
-  
+
         case sync_method
           when SyncMethod::MARKETO_ID
             raise "lead has no idnum" unless lead.idnum
@@ -26,7 +26,7 @@ module Markety
           else
             raise "unrecognized Markety::SyncMethod '#{sync_method}'"
         end
-  
+
         # note from gbirchmeier:
         #   A Marketo support guy told me the fields must come in a very particular order,
         #     thus why this flow is a little janky.
@@ -37,16 +37,16 @@ module Markety
           lead_record: { },
           return_lead: true,
         }
-  
+
         # id fields must come first in lead_record
-        request_hash[:lead_record][:id]=lead.idnum if sync_method==SyncMethod::MARKETO_ID
+        request_hash[:lead_record]["Id"]=lead.idnum if sync_method==SyncMethod::MARKETO_ID
         use_foreign_id = lead.foreign_sys_person_id && [SyncMethod::MARKETO_ID,SyncMethod::FOREIGN_ID].include?(sync_method)
         request_hash[:lead_record][:foreignSysPersonId]=lead.foreign_sys_person_id if use_foreign_id
         request_hash[:lead_record]["Email"]=lead.email if lead.email
-  
+
         # now lead attributes (which must be ordered name/type/value) (type is optional, but must precede value if present)
         request_hash[:lead_record][:lead_attribute_list] = { attribute: lead.send(:attributes_soap_array) }
-  
+
         request_hash
       end
 
