@@ -18,11 +18,9 @@ module Markety
     # * +:log+ (bool) - enable/disable Savon logging (default: true)
     # * +:target_workspace+ (string) - name of workspace to use, if any
     def initialize(access_key, secret_key, end_point, options = {})
-      api_version = options.fetch(:api_version, '2_3')
-
       @client = Savon.client do
         endpoint end_point
-        wsdl "http://app.marketo.com/soap/mktows/#{api_version}?WSDL"
+        wsdl "#{end_point}?WSDL"
         namespaces({"xmlns:ns1" => "http://www.marketo.com/mktows/"})
         env_namespace "SOAP-ENV"
         pretty_print_xml true
